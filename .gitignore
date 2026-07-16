@@ -1,0 +1,16 @@
+# Secrets
+.env.prod
+.env.local
+*.env
+
+# Nuxt
+frontend/.nuxt/
+frontend/.output/
+frontend/node_modules/
+
+# Go
+backend/bin/
+backend/logs/
+
+# OS
+.DS_Store

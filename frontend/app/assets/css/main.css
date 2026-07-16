@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Amiri:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --green: #1D9E75;
+  --green-light: #E1F5EE;
+  --green-mid: #5DCAA5;
+  --green-dark: #0F6E56;
+  --green-darker: #085041;
+  --blue-light: #E6F1FB;
+  --blue-mid: #185FA5;
+  --purple-light: #EEEDFE;
+  --purple-mid: #3C3489;
+  --amber-light: #FAEEDA;
+  --amber-mid: #633806;
+  --gray-bg: #F7F8FA;
+  --gray-surface: #FFFFFF;
+  --gray-border: #E5E7EB;
+  --gray-border-soft: #F0F2F5;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-tertiary: #9CA3AF;
+}
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--gray-bg);
+    color: var(--text-primary);
+  }
+
+  .font-arabic {
+    font-family: 'Amiri', serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-green-500 text-white font-medium rounded-[10px] px-5 py-2.5 text-sm cursor-pointer transition-colors hover:bg-green-700 border-0;
+  }
+
+  .btn-outline {
+    @apply bg-transparent text-gray-500 border border-gray-200 rounded-[10px] text-[13px] px-4 py-2 cursor-pointer;
+  }
+
+  .card {
+    @apply bg-white border border-gray-200 rounded-[14px] p-5;
+  }
+
+  .badge {
+    @apply inline-block text-[11px] font-medium px-2.5 py-0.5 rounded-full;
+  }
+
+  .form-input {
+    @apply w-full py-2.5 px-3 pl-9 border border-gray-200 rounded-[10px] text-[13.5px] text-gray-900 bg-white transition-all outline-none;
+    @apply focus:border-green-500 focus:ring-2 focus:ring-green-500/10;
+  }
+
+  .form-label {
+    @apply text-xs text-gray-500 block mb-1;
+  }
+
+  .nav-item {
+    @apply flex items-center gap-2.5 px-5 py-2.5 text-[13.5px] text-gray-500 cursor-pointer border-l-2 border-transparent transition-all hover:bg-gray-50 hover:text-gray-900;
+  }
+
+  .nav-item.active {
+    @apply text-green-600 bg-green-50 border-l-green-500 font-medium;
+  }
+}

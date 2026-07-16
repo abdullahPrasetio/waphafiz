@@ -1,0 +1,341 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="722" viewBox="0 0 1700 722" font-family="Inter, 'Helvetica Neue', Arial, sans-serif">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1700" y2="722" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#0B5E47"/>
+    <stop offset="0.42" stop-color="#149069"/>
+    <stop offset="1" stop-color="#1D9E75"/>
+  </linearGradient>
+  <radialGradient id="hl" cx="0.86" cy="0.30" r="0.55">
+    <stop offset="0" stop-color="#5DCAA5" stop-opacity="0.28"/>
+    <stop offset="0.6" stop-color="#5DCAA5" stop-opacity="0"/>
+  </radialGradient>
+  <clipPath id="bannerClip"><rect width="1700" height="722"/></clipPath>
+  <clipPath id="sclip"><rect width="182" height="392" rx="22"/></clipPath>
+  <style>
+    text{font-family:'Inter','Helvetica Neue',Arial,sans-serif}
+    .ar{font-family:'Amiri','Geeza Pro','Scheherazade New',serif}
+  </style>
+</defs>
+
+<!-- background -->
+<rect width="1700" height="722" fill="url(#bg)"/>
+<rect width="1700" height="722" fill="url(#hl)"/>
+
+<!-- decorative blobs -->
+<g clip-path="url(#bannerClip)">
+  <circle cx="449" cy="35" r="75" fill="#EF9F27" opacity="0.92"/>
+  <circle cx="232" cy="647" r="45" fill="#FAC775" opacity="0.85"/>
+  <circle cx="1454" cy="168" r="110" fill="#ffffff" opacity="0.06"/>
+  <circle cx="593" cy="62" r="28" fill="none" stroke="#ffffff" stroke-width="9" opacity="0.18"/>
+  <circle cx="1238" cy="612" r="17" fill="none" stroke="#FAC775" stroke-width="7" opacity="0.8"/>
+  <circle cx="1402" cy="712" r="60" fill="#0F6E56" opacity="0.55"/>
+  <circle cx="1176" cy="134" r="14" fill="#ffffff" opacity="0.55"/>
+</g>
+
+<!-- ===== BRAND (left) ===== -->
+<g>
+  <rect x="56" y="46" width="38" height="38" rx="11" fill="#ffffff"/>
+  <!-- book mark -->
+  <path d="M67 58 q8 -4 13 0 v15 q-5 -3 -13 0 z M88 58 q-8 -4 -13 0 v15 q5 -3 13 0 z" fill="#1D9E75"/>
+  <text x="103" y="74" font-size="30" font-weight="800" letter-spacing="-0.5">
+    <tspan fill="#ffffff">WAP</tspan><tspan fill="#FAC775">Hafiz</tspan>
+  </text>
+  <text x="56" y="120" font-size="19" font-weight="600" fill="#ffffff" opacity="0.95">Satu aplikasi untuk</text>
+  <text x="56" y="144" font-size="19" font-weight="600" fill="#ffffff" opacity="0.95">seluruh hafalan Quran</text>
+  <text x="56" y="168" font-size="19" font-weight="600" fill="#ffffff" opacity="0.95">keluarga Anda</text>
+
+  <g font-size="13" fill="#ffffff" opacity="0.72">
+    <text x="56" y="200">Catat hafalan, jalankan</text>
+    <text x="56" y="218">muraja'ah otomatis, dan</text>
+    <text x="56" y="236">pantau progress semua</text>
+    <text x="56" y="254">anggota dalam satu</text>
+    <text x="56" y="272">dashboard privat keluarga.</text>
+  </g>
+
+  <!-- stack chips -->
+  <g font-size="10.5" font-weight="500" fill="#ffffff">
+    <rect x="56"  y="292" width="62" height="20" rx="10" fill="#ffffff" fill-opacity="0.14"/><text x="87"  y="306" text-anchor="middle">Go · Fiber</text>
+    <rect x="124" y="292" width="50" height="20" rx="10" fill="#ffffff" fill-opacity="0.14"/><text x="149" y="306" text-anchor="middle">Nuxt 3</text>
+    <rect x="180" y="292" width="74" height="20" rx="10" fill="#ffffff" fill-opacity="0.14"/><text x="217" y="306" text-anchor="middle">PostgreSQL</text>
+    <rect x="56"  y="318" width="46" height="20" rx="10" fill="#ffffff" fill-opacity="0.14"/><text x="79"  y="332" text-anchor="middle">Redis</text>
+    <rect x="108" y="318" width="52" height="20" rx="10" fill="#ffffff" fill-opacity="0.14"/><text x="134" y="332" text-anchor="middle">Docker</text>
+  </g>
+</g>
+
+<!-- ===== FEATURE HEADINGS ===== -->
+<g>
+  <!-- col1 x=324 -->
+  <text x="324" y="58" font-size="11" font-weight="700" letter-spacing="0.6" fill="#FAC775">DASHBOARD</text>
+  <text x="324" y="80" font-size="15" font-weight="800" fill="#ffffff">Pantau Progress Hafalan</text>
+  <text x="324" y="98" font-size="15" font-weight="600" fill="#ffffff">Secara Real-Time</text>
+  <!-- col2 x=542 -->
+  <text x="542" y="58" font-size="11" font-weight="700" letter-spacing="0.6" fill="#FAC775">TRACKER</text>
+  <text x="542" y="80" font-size="15" font-weight="800" fill="#ffffff">Catat Hafalan Baru</text>
+  <text x="542" y="98" font-size="15" font-weight="600" fill="#ffffff">(Sabak) Tiap Hari</text>
+  <!-- col3 x=760 -->
+  <text x="760" y="58" font-size="11" font-weight="700" letter-spacing="0.6" fill="#FAC775">MURAJA'AH</text>
+  <text x="760" y="80" font-size="15" font-weight="800" fill="#ffffff">Jadwal Sabqi &amp; Manzil</text>
+  <text x="760" y="98" font-size="15" font-weight="600" fill="#ffffff">Otomatis Harian</text>
+  <!-- col4 x=978 -->
+  <text x="978" y="58" font-size="11" font-weight="700" letter-spacing="0.6" fill="#FAC775">AL-QURAN</text>
+  <text x="978" y="80" font-size="15" font-weight="800" fill="#ffffff">Baca &amp; Dengar Murottal</text>
+  <text x="978" y="98" font-size="15" font-weight="600" fill="#ffffff">Per Ayat</text>
+  <!-- col5 x=1196 -->
+  <text x="1196" y="58" font-size="11" font-weight="700" letter-spacing="0.6" fill="#FAC775">ADMIN</text>
+  <text x="1196" y="80" font-size="15" font-weight="800" fill="#ffffff">Kelola Anggota</text>
+  <text x="1196" y="98" font-size="15" font-weight="600" fill="#ffffff">Keluarga &amp; Invite Code</text>
+</g>
+
+<!-- ===== END BRAND (right) ===== -->
+<g text-anchor="end">
+  <text x="1644" y="78" font-size="32" font-weight="800" letter-spacing="-0.5">
+    <tspan fill="#ffffff">WAP</tspan><tspan fill="#FAC775">Hafiz</tspan>
+  </text>
+  <text x="1644" y="100" font-size="12.5" fill="#ffffff" opacity="0.8">Hafal Quran</text>
+  <text x="1644" y="116" font-size="12.5" fill="#ffffff" opacity="0.8">bersama keluarga</text>
+</g>
+
+<!-- ================= PHONES ================= -->
+
+<!-- PHONE 1 · DASHBOARD (tall) -->
+<g transform="translate(326,250)">
+  <rect width="196" height="406" rx="30" fill="#0F2A22"/>
+  <rect x="7" y="7" width="182" height="392" rx="22" fill="#F7F8FA"/>
+  <rect x="70" y="14" width="56" height="5" rx="2.5" fill="#0F2A22"/>
+  <g transform="translate(7,7)" clip-path="url(#sclip)">
+    <rect width="182" height="38" fill="#ffffff"/>
+    <text x="10" y="24" font-size="11" font-weight="700"><tspan fill="#1D9E75">WAP</tspan><tspan fill="#EF9F27">Hafiz</tspan></text>
+    <circle cx="170" cy="19" r="2.4" fill="#6B7280"/>
+    <text x="10" y="58" font-size="11" font-weight="700" fill="#111827">Assalamualaikum,</text>
+    <text x="10" y="72" font-size="11" font-weight="700" fill="#111827">Abdullah</text>
+    <rect x="116" y="46" width="56" height="17" rx="8.5" fill="#FAEEDA"/>
+    <circle cx="126" cy="54.5" r="2.5" fill="#EF9F27"/>
+    <text x="148" y="58" font-size="8.5" font-weight="600" fill="#633806" text-anchor="middle">7 hari</text>
+    <!-- stats -->
+    <g>
+      <rect x="8"  y="84"  width="80" height="36" rx="8" fill="#fff" stroke="#E5E7EB"/>
+      <text x="15" y="104" font-size="14" font-weight="800" fill="#111827">3<tspan font-size="8" fill="#9CA3AF"> Juz</tspan></text>
+      <text x="15" y="115" font-size="7" fill="#6B7280">TOTAL HAFAL</text>
+      <rect x="94" y="84"  width="80" height="36" rx="8" fill="#fff" stroke="#E5E7EB"/>
+      <text x="101" y="104" font-size="14" font-weight="800" fill="#111827">12</text>
+      <text x="101" y="115" font-size="7" fill="#6B7280">SURAH</text>
+      <rect x="8"  y="124" width="80" height="36" rx="8" fill="#fff" stroke="#E5E7EB"/>
+      <text x="15" y="144" font-size="14" font-weight="800" fill="#111827">248</text>
+      <text x="15" y="155" font-size="7" fill="#6B7280">AYAT</text>
+      <rect x="94" y="124" width="80" height="36" rx="8" fill="#fff" stroke="#E5E7EB"/>
+      <text x="101" y="144" font-size="14" font-weight="800" fill="#111827">7</text>
+      <text x="101" y="155" font-size="7" fill="#6B7280">HARI STREAK</text>
+    </g>
+    <!-- reminder -->
+    <rect x="8" y="170" width="166" height="30" rx="9" fill="#E1F5EE" stroke="#9FE1CB"/>
+    <rect x="16" y="178" width="13" height="13" rx="3" fill="#0F6E56"/>
+    <text x="35" y="184" font-size="8" font-weight="700" fill="#085041">Muraja'ah hari ini</text>
+    <text x="35" y="194" font-size="7" fill="#0F6E56">3 tugas menunggu diselesaikan</text>
+    <!-- progress card -->
+    <rect x="8" y="208" width="166" height="54" rx="10" fill="#fff" stroke="#E5E7EB"/>
+    <text x="16" y="224" font-size="9" font-weight="700" fill="#111827">Progress Hafalan</text>
+    <text x="166" y="224" font-size="7.5" font-weight="600" fill="#1D9E75" text-anchor="end">Detail</text>
+    <rect x="16" y="232" width="150" height="5" rx="2.5" fill="#E5E7EB"/>
+    <rect x="16" y="232" width="111" height="5" rx="2.5" fill="#1D9E75"/>
+    <text x="16" y="252" font-size="7.5" fill="#6B7280">An-Naba' · 1–28</text>
+    <text x="166" y="252" font-size="7.5" font-weight="700" fill="#111827" text-anchor="end">74%</text>
+  </g>
+</g>
+
+<!-- PHONE 2 · HAFALAN (normal) -->
+<g transform="translate(544,264)">
+  <rect width="196" height="406" rx="30" fill="#0F2A22"/>
+  <rect x="7" y="7" width="182" height="392" rx="22" fill="#F7F8FA"/>
+  <rect x="70" y="14" width="56" height="5" rx="2.5" fill="#0F2A22"/>
+  <g transform="translate(7,7)" clip-path="url(#sclip)">
+    <rect width="182" height="38" fill="#ffffff"/>
+    <text x="10" y="24" font-size="11" font-weight="700" fill="#1D9E75">Hafalan</text>
+    <circle cx="170" cy="19" r="2.4" fill="#6B7280"/>
+    <!-- toolbar -->
+    <rect x="8" y="50" width="108" height="20" rx="8" fill="#fff" stroke="#E5E7EB"/>
+    <text x="18" y="63" font-size="7.5" fill="#9CA3AF">Cari surah…</text>
+    <rect x="122" y="50" width="52" height="20" rx="8" fill="#1D9E75"/>
+    <text x="148" y="63" font-size="8" font-weight="600" fill="#fff" text-anchor="middle">+ Tambah</text>
+    <!-- filter badges -->
+    <rect x="8"  y="80" width="36" height="15" rx="7.5" fill="#E1F5EE"/><text x="26"  y="91" font-size="7" fill="#085041" text-anchor="middle">Hafal</text>
+    <rect x="48" y="80" width="40" height="15" rx="7.5" fill="#FAEEDA"/><text x="68"  y="91" font-size="7" fill="#633806" text-anchor="middle">Sedang</text>
+    <rect x="92" y="80" width="36" height="15" rx="7.5" fill="#EEF0F3"/><text x="110" y="91" font-size="7" fill="#6B7280" text-anchor="middle">Belum</text>
+    <!-- surah grid -->
+    <g font-family="Inter">
+      <!-- c1 -->
+      <rect x="8" y="104" width="80" height="58" rx="9" fill="#fff" stroke="#5DCAA5"/>
+      <rect x="15" y="111" width="18" height="18" rx="5" fill="#E1F5EE"/><text x="24" y="124" font-size="8" font-weight="700" fill="#0F6E56" text-anchor="middle">78</text>
+      <rect x="58" y="111" width="24" height="13" rx="6.5" fill="#E1F5EE"/><text x="70" y="121" font-size="6.5" fill="#085041" text-anchor="middle">Hafal</text>
+      <text x="15" y="142" font-size="9" font-weight="700" fill="#111827">An-Naba'</text>
+      <text x="15" y="154" font-size="7" fill="#9CA3AF">40 ayat · selesai</text>
+      <!-- c2 -->
+      <rect x="94" y="104" width="80" height="58" rx="9" fill="#fff" stroke="#5DCAA5"/>
+      <rect x="101" y="111" width="18" height="18" rx="5" fill="#E1F5EE"/><text x="110" y="124" font-size="8" font-weight="700" fill="#0F6E56" text-anchor="middle">93</text>
+      <rect x="144" y="111" width="24" height="13" rx="6.5" fill="#E1F5EE"/><text x="156" y="121" font-size="6.5" fill="#085041" text-anchor="middle">Hafal</text>
+      <text x="101" y="142" font-size="9" font-weight="700" fill="#111827">Ad-Duha</text>
+      <text x="101" y="154" font-size="7" fill="#9CA3AF">11 ayat · selesai</text>
+      <!-- c3 -->
+      <rect x="8" y="168" width="80" height="58" rx="9" fill="#fff" stroke="#FAC775"/>
+      <rect x="15" y="175" width="18" height="18" rx="5" fill="#E1F5EE"/><text x="24" y="188" font-size="8" font-weight="700" fill="#0F6E56" text-anchor="middle">2</text>
+      <rect x="52" y="175" width="30" height="13" rx="6.5" fill="#FAEEDA"/><text x="67" y="185" font-size="6.5" fill="#633806" text-anchor="middle">Sedang</text>
+      <text x="15" y="206" font-size="9" font-weight="700" fill="#111827">Al-Baqarah</text>
+      <text x="15" y="218" font-size="7" fill="#9CA3AF">1–20 / 286</text>
+      <!-- c4 -->
+      <rect x="94" y="168" width="80" height="58" rx="9" fill="#fff" stroke="#E5E7EB"/>
+      <rect x="101" y="175" width="18" height="18" rx="5" fill="#E1F5EE"/><text x="110" y="188" font-size="8" font-weight="700" fill="#0F6E56" text-anchor="middle">18</text>
+      <rect x="142" y="175" width="26" height="13" rx="6.5" fill="#EEF0F3"/><text x="155" y="185" font-size="6.5" fill="#6B7280" text-anchor="middle">Belum</text>
+      <text x="101" y="206" font-size="9" font-weight="700" fill="#111827">Al-Kahfi</text>
+      <text x="101" y="218" font-size="7" fill="#9CA3AF">110 ayat</text>
+    </g>
+  </g>
+</g>
+
+<!-- PHONE 3 · MURAJA'AH (tall) -->
+<g transform="translate(762,250)">
+  <rect width="196" height="406" rx="30" fill="#0F2A22"/>
+  <rect x="7" y="7" width="182" height="392" rx="22" fill="#F7F8FA"/>
+  <rect x="70" y="14" width="56" height="5" rx="2.5" fill="#0F2A22"/>
+  <g transform="translate(7,7)" clip-path="url(#sclip)">
+    <rect width="182" height="38" fill="#ffffff"/>
+    <text x="10" y="24" font-size="11" font-weight="700" fill="#1D9E75">Muraja'ah</text>
+    <circle cx="170" cy="19" r="2.4" fill="#6B7280"/>
+    <!-- summary -->
+    <rect x="8" y="48" width="80" height="34" rx="8" fill="#fff" stroke="#E5E7EB"/>
+    <text x="15" y="68" font-size="13" font-weight="800" fill="#111827">5</text>
+    <text x="15" y="78" font-size="7" fill="#6B7280">SABQI HARI INI</text>
+    <rect x="94" y="48" width="80" height="34" rx="8" fill="#fff" stroke="#E5E7EB"/>
+    <text x="101" y="68" font-size="13" font-weight="800" fill="#111827">2</text>
+    <text x="101" y="78" font-size="7" fill="#6B7280">MANZIL HARI INI</text>
+    <!-- sabqi -->
+    <text x="8" y="98" font-size="7.5" font-weight="700" letter-spacing="0.4" fill="#9CA3AF">SABQI · 7 HARI TERAKHIR</text>
+    <g opacity="0.55">
+      <rect x="8" y="104" width="166" height="30" rx="9" fill="#fff" stroke="#E5E7EB"/>
+      <rect x="14" y="109" width="20" height="20" rx="6" fill="#E1F5EE"/><circle cx="24" cy="119" r="4" fill="#1D9E75"/>
+      <text x="42" y="117" font-size="9" font-weight="700" fill="#111827">An-Naba' 1–20</text>
+      <text x="42" y="128" font-size="7.5" fill="#6B7280">Sabqi · selesai</text>
+      <circle cx="162" cy="119" r="9" fill="#1D9E75"/>
+      <path d="M158 119 l3 3 l5 -5" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    </g>
+    <rect x="8" y="140" width="166" height="30" rx="9" fill="#fff" stroke="#E5E7EB"/>
+    <rect x="14" y="145" width="20" height="20" rx="6" fill="#E1F5EE"/><circle cx="24" cy="155" r="4" fill="#1D9E75"/>
+    <text x="42" y="153" font-size="9" font-weight="700" fill="#111827">An-Naba' 21–40</text>
+    <text x="42" y="164" font-size="7.5" fill="#6B7280">Sabqi · hari ini</text>
+    <circle cx="162" cy="155" r="9" fill="none" stroke="#E5E7EB" stroke-width="1.5"/>
+    <!-- manzil -->
+    <text x="8" y="186" font-size="7.5" font-weight="700" letter-spacing="0.4" fill="#9CA3AF">MANZIL · SIKLUS 7 HARI</text>
+    <rect x="8" y="192" width="166" height="30" rx="9" fill="#fff" stroke="#E5E7EB"/>
+    <rect x="14" y="197" width="20" height="20" rx="6" fill="#E6F1FB"/><rect x="20" y="203" width="8" height="8" rx="1.5" fill="#185FA5"/>
+    <text x="42" y="205" font-size="9" font-weight="700" fill="#111827">Ad-Duha 1–11</text>
+    <text x="42" y="216" font-size="7.5" fill="#6B7280">Manzil · hari ke-3</text>
+    <circle cx="162" cy="207" r="9" fill="none" stroke="#E5E7EB" stroke-width="1.5"/>
+    <rect x="8" y="228" width="166" height="30" rx="9" fill="#fff" stroke="#E5E7EB"/>
+    <rect x="14" y="233" width="20" height="20" rx="6" fill="#E6F1FB"/><rect x="20" y="239" width="8" height="8" rx="1.5" fill="#185FA5"/>
+    <text x="42" y="241" font-size="9" font-weight="700" fill="#111827">Al-Ikhlas 1–4</text>
+    <text x="42" y="252" font-size="7.5" fill="#6B7280">Manzil · hari ke-3</text>
+    <circle cx="162" cy="243" r="9" fill="none" stroke="#E5E7EB" stroke-width="1.5"/>
+  </g>
+</g>
+
+<!-- PHONE 4 · AL-QURAN (normal) -->
+<g transform="translate(980,264)">
+  <rect width="196" height="406" rx="30" fill="#0F2A22"/>
+  <rect x="7" y="7" width="182" height="392" rx="22" fill="#F7F8FA"/>
+  <rect x="70" y="14" width="56" height="5" rx="2.5" fill="#0F2A22"/>
+  <g transform="translate(7,7)" clip-path="url(#sclip)">
+    <rect width="182" height="38" fill="#ffffff"/>
+    <path d="M16 19 l-5 5 l5 5" stroke="#6B7280" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="26" y="24" font-size="11" font-weight="700" fill="#1D9E75">Al-Quran</text>
+    <circle cx="170" cy="19" r="2.4" fill="#6B7280"/>
+    <!-- surah header -->
+    <rect x="8" y="48" width="166" height="58" rx="10" fill="#fff" stroke="#E5E7EB"/>
+    <text x="91" y="76" class="ar" font-size="22" fill="#1D9E75" text-anchor="middle">سُورَة النَّبَأ</text>
+    <text x="91" y="90" font-size="9.5" font-weight="700" fill="#111827" text-anchor="middle">An-Naba' · Berita Besar</text>
+    <text x="91" y="101" font-size="7.5" fill="#6B7280" text-anchor="middle">Makkiyah · 40 ayat</text>
+    <!-- player -->
+    <rect x="8" y="114" width="166" height="40" rx="10" fill="#fff" stroke="#E5E7EB"/>
+    <circle cx="29" cy="134" r="15" fill="#1D9E75"/>
+    <path d="M25 128 l8 6 l-8 6 z" fill="#fff"/>
+    <text x="52" y="130" font-size="8.5" font-weight="600" fill="#111827">Qori: Mishary Alafasy</text>
+    <rect x="52" y="138" width="114" height="3" rx="1.5" fill="#E5E7EB"/>
+    <rect x="52" y="138" width="52" height="3" rx="1.5" fill="#1D9E75"/>
+    <!-- ayah card -->
+    <rect x="8" y="162" width="166" height="92" rx="10" fill="#fff" stroke="#5DCAA5"/>
+    <circle cx="22" cy="178" r="8" fill="#E1F5EE"/><text x="22" y="181" font-size="7.5" font-weight="700" fill="#0F6E56" text-anchor="middle">1</text>
+    <text x="166" y="202" class="ar" font-size="18" fill="#111827" text-anchor="end" direction="rtl">عَمَّ يَتَسَآءَلُونَ</text>
+    <text x="16" y="228" font-size="7.5" fill="#6B7280">Tentang apakah mereka</text>
+    <text x="16" y="240" font-size="7.5" fill="#6B7280">saling bertanya-tanya?</text>
+  </g>
+</g>
+
+<!-- PHONE 5 · ADMIN (tall) -->
+<g transform="translate(1198,250)">
+  <rect width="196" height="406" rx="30" fill="#0F2A22"/>
+  <rect x="7" y="7" width="182" height="392" rx="22" fill="#F7F8FA"/>
+  <rect x="70" y="14" width="56" height="5" rx="2.5" fill="#0F2A22"/>
+  <g transform="translate(7,7)" clip-path="url(#sclip)">
+    <rect width="182" height="38" fill="#ffffff"/>
+    <text x="10" y="24" font-size="11" font-weight="700" fill="#1D9E75">Anggota</text>
+    <rect x="138" y="11" width="34" height="15" rx="7.5" fill="#EEEDFE"/><text x="155" y="22" font-size="7.5" font-weight="600" fill="#3C3489" text-anchor="middle">Admin</text>
+    <!-- invite -->
+    <rect x="8" y="48" width="166" height="34" rx="9" fill="#E1F5EE" stroke="#5DCAA5" stroke-dasharray="4 3"/>
+    <text x="16" y="62" font-size="7" letter-spacing="0.4" fill="#0F6E56">KODE UNDANGAN</text>
+    <text x="16" y="76" font-size="11" font-weight="800" letter-spacing="1" fill="#085041">HAFIZ-2026</text>
+    <rect x="152" y="58" width="14" height="14" rx="3" fill="none" stroke="#1D9E75" stroke-width="1.4"/>
+    <!-- label -->
+    <text x="8" y="100" font-size="7.5" font-weight="700" letter-spacing="0.4" fill="#9CA3AF">ANGGOTA KELUARGA · 8</text>
+    <!-- member rows -->
+    <!-- AP -->
+    <rect x="8" y="106" width="166" height="32" rx="9" fill="#fff" stroke="#E5E7EB"/>
+    <circle cx="26" cy="122" r="11" fill="#1D9E75"/><text x="26" y="125" font-size="8.5" font-weight="700" fill="#fff" text-anchor="middle">AP</text>
+    <text x="43" y="119" font-size="9" font-weight="700" fill="#111827">Abdullah</text>
+    <rect x="93" y="112" width="34" height="13" rx="6.5" fill="#EEEDFE"/><text x="110" y="122" font-size="6.5" fill="#3C3489" text-anchor="middle">Admin</text>
+    <rect x="43" y="126" width="105" height="3" rx="1.5" fill="#E5E7EB"/><rect x="43" y="126" width="78" height="3" rx="1.5" fill="#1D9E75"/>
+    <text x="166" y="124" font-size="8" font-weight="700" fill="#1D9E75" text-anchor="end">74%</text>
+    <!-- SF -->
+    <rect x="8" y="144" width="166" height="32" rx="9" fill="#fff" stroke="#E5E7EB"/>
+    <circle cx="26" cy="160" r="11" fill="#6C63C7"/><text x="26" y="163" font-size="8.5" font-weight="700" fill="#fff" text-anchor="middle">SF</text>
+    <text x="43" y="157" font-size="9" font-weight="700" fill="#111827">Salma F.</text>
+    <rect x="43" y="164" width="105" height="3" rx="1.5" fill="#E5E7EB"/><rect x="43" y="164" width="61" height="3" rx="1.5" fill="#1D9E75"/>
+    <text x="166" y="162" font-size="8" font-weight="700" fill="#1D9E75" text-anchor="end">58%</text>
+    <!-- YH -->
+    <rect x="8" y="182" width="166" height="32" rx="9" fill="#fff" stroke="#E5E7EB"/>
+    <circle cx="26" cy="198" r="11" fill="#EF9F27"/><text x="26" y="201" font-size="8.5" font-weight="700" fill="#fff" text-anchor="middle">YH</text>
+    <text x="43" y="195" font-size="9" font-weight="700" fill="#111827">Yusuf H.</text>
+    <rect x="43" y="202" width="105" height="3" rx="1.5" fill="#E5E7EB"/><rect x="43" y="202" width="43" height="3" rx="1.5" fill="#1D9E75"/>
+    <text x="166" y="200" font-size="8" font-weight="700" fill="#1D9E75" text-anchor="end">41%</text>
+    <!-- RA -->
+    <rect x="8" y="220" width="166" height="32" rx="9" fill="#fff" stroke="#E5E7EB"/>
+    <circle cx="26" cy="236" r="11" fill="#185FA5"/><text x="26" y="239" font-size="8.5" font-weight="700" fill="#fff" text-anchor="middle">RA</text>
+    <text x="43" y="233" font-size="9" font-weight="700" fill="#111827">Rania A.</text>
+    <rect x="43" y="240" width="105" height="3" rx="1.5" fill="#E5E7EB"/><rect x="43" y="240" width="35" height="3" rx="1.5" fill="#1D9E75"/>
+    <text x="166" y="238" font-size="8" font-weight="700" fill="#1D9E75" text-anchor="end">33%</text>
+  </g>
+</g>
+
+<!-- ================= MASCOT ================= -->
+<g transform="translate(1405,366)">
+  <ellipse cx="115" cy="288" rx="78" ry="9" fill="#000000" opacity="0.18"/>
+  <rect x="98" y="205" width="22" height="78" rx="11" fill="#11463A"/>
+  <rect x="122" y="208" width="22" height="75" rx="11" fill="#0F6E56"/>
+  <rect x="92" y="276" width="34" height="14" rx="7" fill="#F5F5F5"/>
+  <rect x="118" y="278" width="34" height="13" rx="6.5" fill="#FFFFFF"/>
+  <path d="M78 150 q37 -22 74 0 l8 70 q-45 16 -90 0 z" fill="#149069"/>
+  <path d="M105 132 l10 22 l10 -22 z" fill="#0F6E56"/>
+  <rect x="60" y="150" width="20" height="60" rx="10" fill="#149069" transform="rotate(18 70 180)"/>
+  <rect x="150" y="152" width="20" height="58" rx="10" fill="#149069" transform="rotate(-12 160 180)"/>
+  <rect x="40" y="150" width="34" height="58" rx="8" fill="#0F2A22" transform="rotate(14 57 179)"/>
+  <rect x="44" y="156" width="26" height="46" rx="4" fill="#E1F5EE" transform="rotate(14 57 179)"/>
+  <circle cx="56" cy="206" r="9" fill="#F0C29A"/>
+  <circle cx="160" cy="206" r="9" fill="#F0C29A"/>
+  <rect x="106" y="116" width="18" height="20" rx="8" fill="#F0C29A"/>
+  <circle cx="115" cy="92" r="34" fill="#F6CBA0"/>
+  <circle cx="83" cy="94" r="6" fill="#F0C29A"/>
+  <path d="M86 96 q29 40 58 0 q-4 30 -29 32 q-25 -2 -29 -32 z" fill="#3B3024"/>
+  <path d="M104 104 q11 9 22 0" stroke="#8A5A3B" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <circle cx="103" cy="88" r="3.4" fill="#2B2B2B"/>
+  <circle cx="127" cy="88" r="3.4" fill="#2B2B2B"/>
+  <path d="M82 74 q33 -40 66 0 q-33 -16 -66 0 z" fill="#0F6E56"/>
+  <rect x="80" y="70" width="70" height="10" rx="5" fill="#085041"/>
+  <path d="M180 60 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 z" fill="#FAC775"/>
+</g>
+</svg>

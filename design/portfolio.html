@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WAPHafiz — Portfolio Showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green: #1D9E75;
+  --green-light: #E1F5EE;
+  --green-mid: #5DCAA5;
+  --green-dark: #0F6E56;
+  --green-darker: #085041;
+  --blue-light: #E6F1FB;
+  --blue-mid: #185FA5;
+  --purple-light: #EEEDFE;
+  --purple-mid: #3C3489;
+  --amber-light: #FAEEDA;
+  --amber-mid: #633806;
+  --gray-bg: #F7F8FA;
+  --gray-surface: #FFFFFF;
+  --gray-border: #E5E7EB;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-tertiary: #9CA3AF;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0A0F1E;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.arabic { font-family: 'Amiri', serif; }
+
+/* ─── HERO ─── */
+.hero {
+  background: linear-gradient(135deg, #0A0F1E 0%, #0F2033 50%, #0A1A0F 100%);
+  padding: 80px 24px 100px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(29,158,117,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(29,158,117,0.15);
+  border: 1px solid rgba(29,158,117,0.3);
+  color: #5DCAA5;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+.hero-logo {
+  width: 64px;
+  height: 64px;
+  background: var(--green);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: white;
+  margin: 0 auto 20px;
+  box-shadow: 0 0 40px rgba(29,158,117,0.4);
+}
+.hero h1 {
+  font-size: 52px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+}
+.hero h1 span { color: var(--green); }
+.hero-tagline {
+  font-size: 18px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+.hero-desc {
+  max-width: 560px;
+  margin: 0 auto 40px;
+  font-size: 15px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.8;
+}
+.hero-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+.stack-chip {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.75);
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  font-weight: 500;
+}
+.stack-chip.primary {
+  background: rgba(29,158,117,0.15);
+  border-color: rgba(29,158,117,0.3);
+  color: #5DCAA5;
+}
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero-stat { text-align: center; }
+.hero-stat-num {
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+}
+.hero-stat-num span { color: var(--green); }
+.hero-stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 2px;
+}
+
+/* ─── SECTION ─── */
+.section {
+  padding: 72px 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--green);
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+.section-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  max-width: 500px;
+  line-height: 1.7;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  margin: 0 24px;
+}
+
+/* ─── FEATURE CARDS ─── */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+@media (max-width: 768px) {
+  .feature-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 36px; }
+}
+@media (max-width: 1024px) {
+  .feature-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.feat-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.feat-card:hover {
+  border-color: rgba(29,158,117,0.4);
+  background: rgba(29,158,117,0.04);
+}
+.feat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+.feat-icon.green { background: rgba(29,158,117,0.15); color: var(--green-mid); }
+.feat-icon.blue { background: rgba(24,95,165,0.15); color: #5A9FDF; }
+.feat-icon.purple { background: rgba(60,52,137,0.2); color: #8B82E0; }
+.feat-icon.amber { background: rgba(239,159,39,0.15); color: #EFAA45; }
+
+.feat-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 8px;
+}
+.feat-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+}
+
+/* ─── SHOWCASE SCREENS ─── */
+.showcase-section { padding: 72px 24px; }
+.showcase-section .section-wrap { max-width: 1100px; margin: 0 auto; }
+
+.screen-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+  margin-top: 56px;
+}
+.screen-row.reverse { direction: rtl; }
+.screen-row.reverse > * { direction: ltr; }
+
+@media (max-width: 768px) {
+  .screen-row, .screen-row.reverse { grid-template-columns: 1fr; }
+}
+
+.screen-info { }
+.screen-number {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.screen-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 12px;
+  letter-spacing: -0.3px;
+}
+.screen-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.screen-points { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.screen-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+}
+.screen-points li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+/* ─── APP MOCKUP SHELLS ─── */
+.mockup-shell {
+  background: #111827;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+}
+.mockup-bar {
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-r { background: #FF5F57; }
+.dot-y { background: #FEBC2E; }
+.dot-g { background: #28C840; }
+.mockup-url {
+  flex: 1;
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+}
+
+/* ─── APP UI COMPONENTS (MINI) ─── */
+.app-mini {
+  background: var(--gray-bg);
+  font-size: 11px;
+  padding: 0;
+}
+
+/* Sidebar layout */
+.app-layout {
+  display: flex;
+  min-height: 280px;
+}
+.app-sidebar {
+  width: 160px;
+  background: white;
+  border-right: 1px solid var(--gray-border);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.app-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 4px 14px;
+  border-bottom: 1px solid var(--gray-border);
+  margin-bottom: 10px;
+}
+.app-logo-mark {
+  width: 24px;
+  height: 24px;
+  background: var(--green);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 11px;
+}
+.app-logo-text { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.nav-item-mini {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 7px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.nav-item-mini.active {
+  background: var(--green-light);
+  color: var(--green);
+  border-left: 2px solid var(--green);
+}
+.app-content {
+  flex: 1;
+  padding: 16px;
+  background: var(--gray-bg);
+  overflow: hidden;
+}
+
+/* Stats mini */
+.stats-mini {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.stat-mini {
+  background: white;
+  border: 1px solid var(--gray-border);
+  border-radius: 10px;
+  padding: 10px;
+}
+.stat-mini-num { font-size: 18px; font-weight: 700; color: var(--text-primary); }
+.stat-mini-label { font-size: 9px; color: var(--text-tertiary); margin-top: 2px; }
+
+/* Card mini */
+.card-mini {
+  background: white;
+  border: 1px solid var(--gray-border);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+.card-mini-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.card-mini-title { font-size: 11px; font-weight: 600; color: var(--text-primary); }
+
+/* Progress rows */
+.progress-row-mini {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--gray-border);
+  gap: 8px;
+}
+.progress-row-mini:last-child { border-bottom: none; }
+.prog-info { flex: 1; }
+.prog-name { font-size: 10px; font-weight: 500; color: var(--text-primary); }
+.prog-sub { font-size: 9px; color: var(--text-tertiary); }
+.prog-bar-bg-mini {
+  width: 60px;
+  height: 4px;
+  background: var(--gray-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.prog-bar-mini { height: 100%; background: var(--green); border-radius: 10px; }
+
+/* Badge mini */
+.badge-mini {
+  font-size: 9px;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.badge-mini-green { background: var(--green-light); color: var(--green-darker); }
+.badge-mini-amber { background: var(--amber-light); color: var(--amber-mid); }
+.badge-mini-gray { background: var(--gray-bg); color: var(--text-tertiary); }
+.badge-mini-blue { background: var(--blue-light); color: var(--blue-mid); }
+
+/* Avatar mini */
+.av-mini {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.av-mini-green { background: var(--green-light); color: var(--green-dark); }
+.av-mini-purple { background: var(--purple-light); color: var(--purple-mid); }
+.av-mini-amber { background: var(--amber-light); color: var(--amber-mid); }
+.av-mini-blue { background: var(--blue-light); color: var(--blue-mid); }
+
+/* Reminder bar */
+.reminder-mini {
+  background: var(--green-light);
+  border: 1px solid #9FE1CB;
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 10px;
+  color: var(--green-dark);
+}
+
+/* Streak chip */
+.streak-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--amber-light);
+  color: var(--amber-mid);
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Quran page mini */
+.surah-header-mini {
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+  border-radius: 10px;
+  padding: 12px;
+  color: white;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.surah-name-ar { font-family: 'Amiri', serif; font-size: 22px; margin-bottom: 4px; }
+.surah-name-id { font-size: 10px; opacity: 0.8; }
+
+.ayah-card-mini {
+  background: white;
+  border: 1px solid var(--gray-border);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 6px;
+}
+.ayah-card-mini.playing { border-color: var(--green-mid); }
+.ayah-num-mini {
+  width: 20px;
+  height: 20px;
+  background: var(--green-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin-bottom: 6px;
+}
+.ayah-text-mini {
+  font-family: 'Amiri', serif;
+  font-size: 16px;
+  text-align: right;
+  direction: rtl;
+  color: var(--text-primary);
+  line-height: 1.8;
+  margin-bottom: 4px;
+}
+.ayah-trans-mini { font-size: 9px; color: var(--text-secondary); line-height: 1.5; }
+
+/* Audio player */
+.player-mini {
+  background: white;
+  border-top: 1px solid var(--gray-border);
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.play-btn-mini {
+  width: 30px;
+  height: 30px;
+  background: var(--green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.player-info { flex: 1; }
+.player-ayah { font-size: 10px; font-weight: 600; color: var(--text-primary); }
+.player-qori { font-size: 9px; color: var(--text-tertiary); }
+.player-timeline {
+  flex: 1;
+  height: 3px;
+  background: var(--gray-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.player-timeline-fill { height: 100%; background: var(--green); width: 35%; }
+
+/* Muraja'ah cards */
+.mj-card-mini {
+  background: white;
+  border: 1px solid var(--gray-border);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mj-card-mini.done { opacity: 0.55; }
+.mj-icon-mini {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.mj-icon-sabqi { background: var(--green-light); color: var(--green); }
+.mj-icon-manzil { background: var(--blue-light); color: var(--blue-mid); }
+.mj-card-info { flex: 1; }
+.mj-card-title { font-size: 11px; font-weight: 600; color: var(--text-primary); }
+.mj-card-sub { font-size: 9px; color: var(--text-tertiary); margin-top: 1px; }
+
+/* Auth card mini */
+.auth-mini {
+  background: var(--gray-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  min-height: 280px;
+}
+.auth-card-mini {
+  background: white;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  width: 100%;
+  max-width: 260px;
+}
+.auth-logo-mini {
+  width: 36px;
+  height: 36px;
+  background: var(--green);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: white;
+  margin: 0 auto 12px;
+}
+.auth-title-mini { font-size: 14px; font-weight: 700; text-align: center; color: var(--text-primary); margin-bottom: 4px; }
+.auth-sub-mini { font-size: 10px; text-align: center; color: var(--text-secondary); margin-bottom: 16px; }
+.invite-banner {
+  background: var(--green-light);
+  border: 1px solid #9FE1CB;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 9px;
+  color: var(--green-dark);
+  margin-bottom: 12px;
+}
+.form-field-mini { margin-bottom: 10px; }
+.form-label-mini { font-size: 10px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; display: block; }
+.form-input-mini {
+  width: 100%;
+  border: 1px solid var(--gray-border);
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-size: 11px;
+  color: var(--text-primary);
+  background: white;
+  outline: none;
+}
+.form-input-mini.focused { border-color: var(--green); box-shadow: 0 0 0 3px rgba(29,158,117,0.12); }
+.btn-primary-mini {
+  width: 100%;
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+/* Admin table mini */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+.admin-table th {
+  text-align: left;
+  padding: 6px 8px;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  background: var(--gray-bg);
+  border-bottom: 1px solid var(--gray-border);
+}
+.admin-table td {
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--gray-border);
+  color: var(--text-primary);
+  font-size: 10px;
+}
+.admin-table tr:hover td { background: var(--gray-bg); }
+
+/* Hafalan grid */
+.hafalan-grid-mini {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.hafalan-card-mini {
+  background: white;
+  border: 1px solid var(--gray-border);
+  border-radius: 8px;
+  padding: 10px 8px;
+}
+.hafalan-card-mini.hafal { border-color: var(--green-mid); }
+.hafalan-card-mini.sedang { border-color: #FAC775; }
+.hafalan-num { font-size: 9px; color: var(--text-tertiary); margin-bottom: 2px; }
+.hafalan-name { font-size: 10px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+.hafalan-ar { font-family: 'Amiri', serif; font-size: 13px; color: var(--text-secondary); text-align: right; direction: rtl; }
+
+/* Invite code */
+.invite-code-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gray-bg);
+  border: 1px dashed var(--gray-border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green-dark);
+  letter-spacing: 0.1em;
+}
+
+/* ─── TECH STACK SECTION ─── */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 48px;
+}
+@media (max-width: 768px) { .tech-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.tech-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+.tech-layer {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+.tech-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 4px;
+}
+.tech-detail {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ─── ARCHITECTURE ─── */
+.arch-box {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  margin-top: 48px;
+  font-family: 'Inter', monospace;
+}
+.arch-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.arch-node {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-lg);
+  padding: 14px 28px;
+  text-align: center;
+  min-width: 200px;
+}
+.arch-node.primary {
+  background: rgba(29,158,117,0.15);
+  border-color: rgba(29,158,117,0.3);
+}
+.arch-node-title { font-size: 13px; font-weight: 600; color: white; }
+.arch-node-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+.arch-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 4px 0;
+}
+.arch-arrow-line { width: 1px; height: 20px; background: rgba(255,255,255,0.15); }
+.arch-arrow-label { font-size: 10px; color: rgba(255,255,255,0.3); padding: 2px 0; }
+.arch-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.arch-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ─── DATA MODEL ─── */
+.model-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 48px;
+}
+@media (max-width: 768px) { .model-grid { grid-template-columns: 1fr; } }
+
+.model-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.model-header {
+  background: rgba(29,158,117,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.model-icon { font-size: 14px; color: var(--green-mid); }
+.model-name { font-size: 13px; font-weight: 600; color: white; }
+.model-fields { padding: 12px 16px; display: flex; flex-direction: column; gap: 6px; }
+.model-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+}
+.field-name { color: rgba(255,255,255,0.7); font-family: 'Inter', monospace; }
+.field-type { color: var(--green-mid); font-size: 10px; }
+.field-pk { color: #EFAA45; font-size: 10px; }
+.field-fk { color: #8B82E0; font-size: 10px; }
+
+/* ─── DESCRIPTION CARDS ─── */
+.desc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 48px;
+}
+@media (max-width: 768px) { .desc-grid { grid-template-columns: 1fr; } }
+
+.desc-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+}
+.desc-lang { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green); margin-bottom: 12px; }
+.desc-text { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.8; }
+
+/* ─── FOOTER ─── */
+.footer {
+  text-align: center;
+  padding: 48px 24px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-text { font-size: 13px; color: rgba(255,255,255,0.3); }
+.footer-name { color: var(--green); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-badge">
+    <i class="ti ti-star"></i>
+    Portfolio Project · 2026
+  </div>
+  <div class="hero-logo">
+    <i class="ti ti-book"></i>
+  </div>
+  <h1>WAP<span>Hafiz</span></h1>
+  <p class="hero-tagline">Aplikasi Hafalan Quran untuk Keluarga</p>
+  <p class="hero-desc">
+    Solusi tracking hafalan Al-Quran yang dirancang khusus untuk keluarga — dengan sistem muraja'ah otomatis mengikuti metode pesantren Sabak–Sabqi–Manzil dan dashboard admin untuk memantau seluruh anggota.
+  </p>
+  <div class="hero-stack">
+    <span class="stack-chip primary">Go · Fiber v2</span>
+    <span class="stack-chip primary">Nuxt 3 · Vue 3</span>
+    <span class="stack-chip primary">PostgreSQL</span>
+    <span class="stack-chip">Redis</span>
+    <span class="stack-chip">JWT · RBAC</span>
+    <span class="stack-chip">GORM</span>
+    <span class="stack-chip">Tailwind CSS</span>
+    <span class="stack-chip">Docker</span>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num"><span>114</span></div>
+      <div class="hero-stat-label">Surah Al-Quran</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num"><span>3</span> Tipe</div>
+      <div class="hero-stat-label">Sistem Muraja'ah</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num"><span>20</span></div>
+      <div class="hero-stat-label">Maks. Pengguna</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num"><span>&lt;2</span>s</div>
+      <div class="hero-stat-label">Target Load Time</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FEATURE OVERVIEW ─── -->
+<section class="section">
+  <div class="section-label">Fitur Utama</div>
+  <div class="section-title">Semua yang dibutuhkan keluarga penghafal Quran</div>
+  <p class="section-sub">Dibangun dengan fokus pada penggunaan harian yang simpel namun sistematis.</p>
+
+  <div class="feature-grid">
+    <div class="feat-card">
+      <div class="feat-icon green"><i class="ti ti-lock"></i></div>
+      <div class="feat-title">Autentikasi Keluarga</div>
+      <div class="feat-desc">Register via kode undangan eksklusif. Tidak ada registrasi terbuka — hanya anggota keluarga yang bisa masuk. Role admin dan member dengan JWT RBAC.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon green"><i class="ti ti-checklist"></i></div>
+      <div class="feat-title">Tracker Hafalan (Sabak)</div>
+      <div class="feat-desc">Catat hafalan baru per ayat atau rentang ayat dengan status belum/sedang/hafal. Riwayat hafalan harian tersimpan otomatis.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon amber"><i class="ti ti-refresh"></i></div>
+      <div class="feat-title">Muraja'ah Otomatis</div>
+      <div class="feat-desc">Jadwal Sabqi (hafalan 7 hari terakhir) dan Manzil (seluruh hafalan lama dalam siklus 7 hari) di-generate otomatis setiap hari.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon blue"><i class="ti ti-player-play"></i></div>
+      <div class="feat-title">Audio Quran</div>
+      <div class="feat-desc">Playback audio per ayat dari alquran.cloud. Pilihan qori populer. Cache Redis 24 jam untuk menghemat bandwidth dan meningkatkan kecepatan.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon purple"><i class="ti ti-chart-bar"></i></div>
+      <div class="feat-title">Dashboard Progress</div>
+      <div class="feat-desc">Admin bisa melihat progress hafalan seluruh anggota dalam satu halaman. Member melihat progress pribadi dan streak hafalan harian.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon blue"><i class="ti ti-users"></i></div>
+      <div class="feat-title">Manajemen Admin</div>
+      <div class="feat-desc">Admin kelola anggota, lihat last-seen, generate ulang invite code, dan aktif/nonaktifkan member. Tabel progress semua anggota sekilas pandang.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── SCREEN 1: DASHBOARD ─── -->
+<section class="showcase-section">
+  <div class="section-wrap">
+    <div class="screen-row">
+      <div class="screen-info">
+        <div class="screen-number">01 · Dashboard</div>
+        <div class="screen-title">Pantau progress hafalan setiap hari</div>
+        <div class="screen-desc">
+          Halaman utama yang memberikan gambaran lengkap — streak harian, reminder muraja'ah hari ini, statistik hafalan, dan daftar aktivitas terkini anggota keluarga.
+        </div>
+        <ul class="screen-points">
+          <li>Streak chip dengan penanda hari berturut-turut</li>
+          <li>Reminder bar muraja'ah Sabqi dan Manzil</li>
+          <li>4 stats card: total ayat hafal, juz selesai, muraja'ah hari ini, hari aktif</li>
+          <li>Progress anggota keluarga dalam satu card</li>
+        </ul>
+      </div>
+      <div class="mockup-shell">
+        <div class="mockup-bar">
+          <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+          <div class="mockup-url">localhost:3000/dashboard</div>
+        </div>
+        <div class="app-mini">
+          <div class="app-layout">
+            <div class="app-sidebar">
+              <div class="app-logo-row">
+                <div class="app-logo-mark"><i class="ti ti-book"></i></div>
+                <div class="app-logo-text">WAPHafiz</div>
+              </div>
+              <div class="nav-item-mini active"><i class="ti ti-layout-dashboard" style="font-size:13px"></i> Dashboard</div>
+              <div class="nav-item-mini"><i class="ti ti-book" style="font-size:13px"></i> Al-Qur'an</div>
+              <div class="nav-item-mini"><i class="ti ti-checklist" style="font-size:13px"></i> Hafalan</div>
+              <div class="nav-item-mini"><i class="ti ti-refresh" style="font-size:13px"></i> Muraja'ah</div>
+              <div class="nav-item-mini"><i class="ti ti-users" style="font-size:13px"></i> Anggota</div>
+            </div>
+            <div class="app-content">
+              <div class="streak-chip"><i class="ti ti-flame" style="font-size:11px"></i> 12 hari berturut</div>
+              <div class="reminder-mini">
+                <i class="ti ti-bell" style="font-size:13px"></i>
+                <div>Muraja'ah hari ini: <strong>Al-Baqarah 1–20</strong> (Sabqi)</div>
+              </div>
+              <div class="stats-mini">
+                <div class="stat-mini">
+                  <div class="stat-mini-num" style="color:var(--green)">847</div>
+                  <div class="stat-mini-label">Ayat Hafal</div>
+                </div>
+                <div class="stat-mini">
+                  <div class="stat-mini-num">3.5</div>
+                  <div class="stat-mini-label">Juz Selesai</div>
+                </div>
+                <div class="stat-mini">
+                  <div class="stat-mini-num" style="color:var(--blue-mid)">2/5</div>
+                  <div class="stat-mini-label">Muraja'ah</div>
+                </div>
+                <div class="stat-mini">
+                  <div class="stat-mini-num" style="color:#EFAA45">12</div>
+                  <div class="stat-mini-label">Hari Aktif</div>
+                </div>
+              </div>
+              <div class="card-mini">
+                <div class="card-mini-head">
+                  <span class="card-mini-title">Progress Anggota</span>
+                  <span style="font-size:9px;color:var(--green)">Lihat semua →</span>
+                </div>
+                <div class="progress-row-mini">
+                  <div class="av-mini av-mini-green">AP</div>
+                  <div class="prog-info">
+                    <div class="prog-name">Abdullah P.</div>
+                    <div class="prog-sub">847 ayat · Juz 3–4</div>
+                  </div>
+                  <div class="prog-bar-bg-mini"><div class="prog-bar-mini" style="width:74%"></div></div>
+                  <span class="badge-mini badge-mini-green">Hafal</span>
+                </div>
+                <div class="progress-row-mini">
+                  <div class="av-mini av-mini-purple">SR</div>
+                  <div class="prog-info">
+                    <div class="prog-name">Siti R.</div>
+                    <div class="prog-sub">423 ayat · Juz 1–2</div>
+                  </div>
+                  <div class="prog-bar-bg-mini"><div class="prog-bar-mini" style="width:37%"></div></div>
+                  <span class="badge-mini badge-mini-amber">Sedang</span>
+                </div>
+                <div class="progress-row-mini">
+                  <div class="av-mini av-mini-amber">MF</div>
+                  <div class="prog-info">
+                    <div class="prog-name">Muhammad F.</div>
+                    <div class="prog-sub">112 ayat · Al-Fatihah</div>
+                  </div>
+                  <div class="prog-bar-bg-mini"><div class="prog-bar-mini" style="width:10%"></div></div>
+                  <span class="badge-mini badge-mini-amber">Sedang</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: QURAN -->
+    <div class="screen-row reverse" style="margin-top:64px">
+      <div class="screen-info">
+        <div class="screen-number">02 · Al-Qur'an</div>
+        <div class="screen-title">Baca dan dengarkan ayat dengan nyaman</div>
+        <div class="screen-desc">
+          Browser Al-Quran terintegrasi dengan teks Arab Amiri, terjemahan, dan audio player per ayat. Pilih qori favorit, putar, dan tandai sebagai hafalan langsung dari halaman ini.
+        </div>
+        <ul class="screen-points">
+          <li>Teks Arab Amiri 24px, RTL, line-height optimal</li>
+          <li>Audio player sticky di bawah dengan timeline</li>
+          <li>Pilihan qori: Alafasy, Abdul Basit, Al-Husary</li>
+          <li>Cache API di Redis 24 jam untuk performa</li>
+        </ul>
+      </div>
+      <div class="mockup-shell">
+        <div class="mockup-bar">
+          <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+          <div class="mockup-url">localhost:3000/quran/2</div>
+        </div>
+        <div class="app-mini">
+          <div class="app-layout">
+            <div class="app-sidebar">
+              <div class="app-logo-row">
+                <div class="app-logo-mark"><i class="ti ti-book"></i></div>
+                <div class="app-logo-text">WAPHafiz</div>
+              </div>
+              <div class="nav-item-mini"><i class="ti ti-layout-dashboard" style="font-size:13px"></i> Dashboard</div>
+              <div class="nav-item-mini active"><i class="ti ti-book" style="font-size:13px"></i> Al-Qur'an</div>
+              <div class="nav-item-mini"><i class="ti ti-checklist" style="font-size:13px"></i> Hafalan</div>
+              <div class="nav-item-mini"><i class="ti ti-refresh" style="font-size:13px"></i> Muraja'ah</div>
+              <div class="nav-item-mini"><i class="ti ti-users" style="font-size:13px"></i> Anggota</div>
+            </div>
+            <div class="app-content" style="padding:12px;display:flex;flex-direction:column;gap:0">
+              <div class="surah-header-mini">
+                <div class="surah-name-ar arabic">سُورَةُ الْبَقَرَة</div>
+                <div class="surah-name-id">Al-Baqarah · Surah ke-2 · 286 Ayat</div>
+                <div style="margin-top:8px;background:rgba(255,255,255,0.2);border-radius:6px;height:4px;overflow:hidden">
+                  <div style="height:100%;width:55%;background:white;border-radius:6px"></div>
+                </div>
+              </div>
+              <div class="ayah-card-mini playing">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+                  <div class="ayah-num-mini">1</div>
+                  <span style="font-size:9px;color:var(--green);font-weight:500">● Sedang diputar</span>
+                </div>
+                <div class="ayah-text-mini arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                <div class="ayah-trans-mini">Dengan nama Allah Yang Maha Pengasih, Maha Penyayang</div>
+              </div>
+              <div class="ayah-card-mini">
+                <div class="ayah-num-mini">2</div>
+                <div class="ayah-text-mini arabic">ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ</div>
+                <div class="ayah-trans-mini">Kitab (Al-Quran) ini tidak ada keraguan padanya; petunjuk bagi mereka yang bertakwa</div>
+              </div>
+              <div style="flex:1"></div>
+              <div class="player-mini" style="border-radius:0 0 0 0;margin:0 -12px -0px">
+                <div class="play-btn-mini"><i class="ti ti-player-pause" style="font-size:11px"></i></div>
+                <div class="player-info">
+                  <div class="player-ayah">Al-Baqarah : 1</div>
+                  <div class="player-qori">Mishary Rashid Alafasy</div>
+                </div>
+                <div class="player-timeline"><div class="player-timeline-fill"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: HAFALAN TRACKER -->
+    <div class="screen-row" style="margin-top:64px">
+      <div class="screen-info">
+        <div class="screen-number">03 · Tracker Hafalan</div>
+        <div class="screen-title">Catat setiap ayat yang berhasil dihafal</div>
+        <div class="screen-desc">
+          Tampilan grid surah yang mudah di-scan. Filter berdasarkan status hafalan, cari surah, dan tambah hafalan baru dengan modal yang simpel. Setiap card menampilkan nama Arab dan progress visual.
+        </div>
+        <ul class="screen-points">
+          <li>Grid responsive surah dengan status border berwarna</li>
+          <li>Filter: Semua / Hafal / Sedang / Belum</li>
+          <li>Modal tambah hafalan: pilih surah, input rentang ayat</li>
+          <li>Status per ayat disimpan sebagai hafalan_progress record</li>
+        </ul>
+      </div>
+      <div class="mockup-shell">
+        <div class="mockup-bar">
+          <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+          <div class="mockup-url">localhost:3000/hafalan</div>
+        </div>
+        <div class="app-mini">
+          <div class="app-layout">
+            <div class="app-sidebar">
+              <div class="app-logo-row">
+                <div class="app-logo-mark"><i class="ti ti-book"></i></div>
+                <div class="app-logo-text">WAPHafiz</div>
+              </div>
+              <div class="nav-item-mini"><i class="ti ti-layout-dashboard" style="font-size:13px"></i> Dashboard</div>
+              <div class="nav-item-mini"><i class="ti ti-book" style="font-size:13px"></i> Al-Qur'an</div>
+              <div class="nav-item-mini active"><i class="ti ti-checklist" style="font-size:13px"></i> Hafalan</div>
+              <div class="nav-item-mini"><i class="ti ti-refresh" style="font-size:13px"></i> Muraja'ah</div>
+              <div class="nav-item-mini"><i class="ti ti-users" style="font-size:13px"></i> Anggota</div>
+            </div>
+            <div class="app-content">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                <div style="font-size:13px;font-weight:700;color:var(--text-primary)">Hafalan Saya</div>
+                <button style="background:var(--green);color:white;border:none;border-radius:7px;padding:5px 10px;font-size:10px;font-weight:600;display:flex;align-items:center;gap:4px">
+                  <i class="ti ti-plus" style="font-size:11px"></i> Tambah
+                </button>
+              </div>
+              <div style="display:flex;gap:6px;margin-bottom:12px">
+                <span style="background:var(--green);color:white;padding:3px 10px;border-radius:20px;font-size:9px;font-weight:600">Semua</span>
+                <span style="background:var(--gray-bg);color:var(--text-secondary);padding:3px 10px;border-radius:20px;font-size:9px">Hafal</span>
+                <span style="background:var(--gray-bg);color:var(--text-secondary);padding:3px 10px;border-radius:20px;font-size:9px">Sedang</span>
+                <span style="background:var(--gray-bg);color:var(--text-secondary);padding:3px 10px;border-radius:20px;font-size:9px">Belum</span>
+              </div>
+              <div class="hafalan-grid-mini">
+                <div class="hafalan-card-mini hafal">
+                  <div class="hafalan-num">Surah 1</div>
+                  <div class="hafalan-name">Al-Fatihah</div>
+                  <div class="hafalan-ar arabic">الْفَاتِحَة</div>
+                  <div style="margin-top:6px"><span class="badge-mini badge-mini-green">Hafal</span></div>
+                </div>
+                <div class="hafalan-card-mini hafal">
+                  <div class="hafalan-num">Surah 2</div>
+                  <div class="hafalan-name">Al-Baqarah</div>
+                  <div class="hafalan-ar arabic">الْبَقَرَة</div>
+                  <div style="margin-top:6px"><span class="badge-mini badge-mini-green">Hafal 1–50</span></div>
+                </div>
+                <div class="hafalan-card-mini sedang">
+                  <div class="hafalan-num">Surah 3</div>
+                  <div class="hafalan-name">Ali 'Imran</div>
+                  <div class="hafalan-ar arabic">آلِ عِمْرَان</div>
+                  <div style="margin-top:6px"><span class="badge-mini badge-mini-amber">Sedang</span></div>
+                </div>
+                <div class="hafalan-card-mini">
+                  <div class="hafalan-num">Surah 4</div>
+                  <div class="hafalan-name">An-Nisa'</div>
+                  <div class="hafalan-ar arabic">النِّسَاء</div>
+                  <div style="margin-top:6px"><span class="badge-mini badge-mini-gray">Belum</span></div>
+                </div>
+                <div class="hafalan-card-mini">
+                  <div class="hafalan-num">Surah 5</div>
+                  <div class="hafalan-name">Al-Ma'idah</div>
+                  <div class="hafalan-ar arabic">الْمَائِدَة</div>
+                  <div style="margin-top:6px"><span class="badge-mini badge-mini-gray">Belum</span></div>
+                </div>
+                <div class="hafalan-card-mini">
+                  <div class="hafalan-num">Surah 36</div>
+                  <div class="hafalan-name">Ya-Sin</div>
+                  <div class="hafalan-ar arabic">يس</div>
+                  <div style="margin-top:6px"><span class="badge-mini badge-mini-gray">Belum</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: MURAJA'AH -->
+    <div class="screen-row reverse" style="margin-top:64px">
+      <div class="screen-info">
+        <div class="screen-number">04 · Muraja'ah</div>
+        <div class="screen-title">Jadwal ulang hafalan otomatis tiap hari</div>
+        <div class="screen-desc">
+          Sistem muraja'ah otomatis mengikuti metode pesantren. Sabqi menjadwalkan hafalan 7 hari terakhir, sedangkan Manzil membagi seluruh hafalan lama ke dalam siklus 7 hari.
+        </div>
+        <ul class="screen-points">
+          <li>Sabqi: review hafalan baru 7 hari terakhir</li>
+          <li>Manzil: siklus seluruh hafalan lama dalam 7 hari</li>
+          <li>Generate otomatis setiap hari setelah ada hafalan</li>
+          <li>Tandai selesai dengan satu klik, card meredup</li>
+        </ul>
+      </div>
+      <div class="mockup-shell">
+        <div class="mockup-bar">
+          <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+          <div class="mockup-url">localhost:3000/murajaah</div>
+        </div>
+        <div class="app-mini">
+          <div class="app-layout">
+            <div class="app-sidebar">
+              <div class="app-logo-row">
+                <div class="app-logo-mark"><i class="ti ti-book"></i></div>
+                <div class="app-logo-text">WAPHafiz</div>
+              </div>
+              <div class="nav-item-mini"><i class="ti ti-layout-dashboard" style="font-size:13px"></i> Dashboard</div>
+              <div class="nav-item-mini"><i class="ti ti-book" style="font-size:13px"></i> Al-Qur'an</div>
+              <div class="nav-item-mini"><i class="ti ti-checklist" style="font-size:13px"></i> Hafalan</div>
+              <div class="nav-item-mini active"><i class="ti ti-refresh" style="font-size:13px"></i> Muraja'ah</div>
+              <div class="nav-item-mini"><i class="ti ti-users" style="font-size:13px"></i> Anggota</div>
+            </div>
+            <div class="app-content">
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px">
+                <div style="background:white;border:1px solid var(--gray-border);border-radius:8px;padding:8px;text-align:center">
+                  <div style="font-size:15px;font-weight:700;color:var(--green)">5</div>
+                  <div style="font-size:8px;color:var(--text-tertiary)">Total</div>
+                </div>
+                <div style="background:white;border:1px solid var(--gray-border);border-radius:8px;padding:8px;text-align:center">
+                  <div style="font-size:15px;font-weight:700;color:var(--green-dark)">2</div>
+                  <div style="font-size:8px;color:var(--text-tertiary)">Selesai</div>
+                </div>
+                <div style="background:white;border:1px solid var(--gray-border);border-radius:8px;padding:8px;text-align:center">
+                  <div style="font-size:15px;font-weight:700;color:var(--amber-mid)">3</div>
+                  <div style="font-size:8px;color:var(--text-tertiary)">Tersisa</div>
+                </div>
+                <div style="background:white;border:1px solid var(--gray-border);border-radius:8px;padding:8px;text-align:center">
+                  <div style="font-size:15px;font-weight:700">60%</div>
+                  <div style="font-size:8px;color:var(--text-tertiary)">Progress</div>
+                </div>
+              </div>
+              <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-tertiary);margin-bottom:6px">SABQI — Hafalan 7 Hari Terakhir</div>
+              <div class="mj-card-mini done">
+                <div class="mj-icon-mini mj-icon-sabqi"><i class="ti ti-check" style="font-size:13px"></i></div>
+                <div class="mj-card-info">
+                  <div class="mj-card-title">Al-Fatihah 1–7</div>
+                  <div class="mj-card-sub">Sabqi · 7 ayat · Selesai</div>
+                </div>
+                <span class="badge-mini badge-mini-green">✓ Selesai</span>
+              </div>
+              <div class="mj-card-mini done">
+                <div class="mj-icon-mini mj-icon-sabqi"><i class="ti ti-check" style="font-size:13px"></i></div>
+                <div class="mj-card-info">
+                  <div class="mj-card-title">Al-Baqarah 1–10</div>
+                  <div class="mj-card-sub">Sabqi · 10 ayat · Selesai</div>
+                </div>
+                <span class="badge-mini badge-mini-green">✓ Selesai</span>
+              </div>
+              <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-tertiary);margin-bottom:6px;margin-top:10px">MANZIL — Siklus Hafalan Lama</div>
+              <div class="mj-card-mini">
+                <div class="mj-icon-mini mj-icon-manzil"><i class="ti ti-refresh" style="font-size:13px"></i></div>
+                <div class="mj-card-info">
+                  <div class="mj-card-title">Al-Baqarah 11–30</div>
+                  <div class="mj-card-sub">Manzil · 20 ayat · Belum selesai</div>
+                </div>
+                <button style="background:var(--green);color:white;border:none;border-radius:6px;padding:3px 8px;font-size:9px;cursor:pointer">Selesai</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 5: AUTH -->
+    <div class="screen-row" style="margin-top:64px">
+      <div class="screen-info">
+        <div class="screen-number">05 · Autentikasi</div>
+        <div class="screen-title">Masuk dengan kode undangan keluarga</div>
+        <div class="screen-desc">
+          Tidak ada registrasi terbuka. Anggota baru hanya bisa bergabung dengan kode undangan yang dibuat admin. Login dengan email dan password, autentikasi via JWT HS256.
+        </div>
+        <ul class="screen-points">
+          <li>Invite code eksklusif per keluarga — bukan open registration</li>
+          <li>JWT HS256 dengan refresh token di Redis</li>
+          <li>Role-based access control: admin vs member</li>
+          <li>Admin bisa regenerate invite code kapan saja</li>
+        </ul>
+      </div>
+      <div class="mockup-shell">
+        <div class="mockup-bar">
+          <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+          <div class="mockup-url">localhost:3000/register</div>
+        </div>
+        <div class="app-mini">
+          <div class="auth-mini">
+            <div class="auth-card-mini">
+              <div class="auth-logo-mini"><i class="ti ti-book"></i></div>
+              <div class="auth-title-mini">Daftar ke WAPHafiz</div>
+              <div class="auth-sub-mini">Masukkan kode undangan dari admin keluarga</div>
+              <div class="invite-banner">
+                <strong>Kode undangan diperlukan.</strong><br>Hubungi kepala keluarga untuk mendapatkan kode undangan.
+              </div>
+              <div class="form-field-mini">
+                <label class="form-label-mini">Kode Undangan</label>
+                <input class="form-input-mini focused" value="FMLY-2024" readonly>
+              </div>
+              <div class="form-field-mini">
+                <label class="form-label-mini">Nama Lengkap</label>
+                <input class="form-input-mini" placeholder="Nama kamu" readonly>
+              </div>
+              <div class="form-field-mini">
+                <label class="form-label-mini">Email</label>
+                <input class="form-input-mini" placeholder="email@contoh.com" readonly>
+              </div>
+              <div class="form-field-mini">
+                <label class="form-label-mini">Password</label>
+                <input class="form-input-mini" type="password" placeholder="••••••••" readonly>
+              </div>
+              <button class="btn-primary-mini">Daftar Sekarang</button>
+              <div style="text-align:center;margin-top:10px;font-size:10px;color:var(--text-tertiary)">
+                Sudah punya akun? <span style="color:var(--green)">Masuk</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 6: ADMIN -->
+    <div class="screen-row reverse" style="margin-top:64px">
+      <div class="screen-info">
+        <div class="screen-number">06 · Admin Panel</div>
+        <div class="screen-title">Pantau seluruh anggota dalam satu tampilan</div>
+        <div class="screen-desc">
+          Dashboard admin menampilkan progress seluruh anggota keluarga, last-seen, status aktif, dan invite code yang bisa di-copy atau di-regenerate. Kelola anggota langsung dari tabel.
+        </div>
+        <ul class="screen-points">
+          <li>Tabel anggota dengan progress bar dan status</li>
+          <li>Invite code dengan tombol copy dan regenerate</li>
+          <li>Last-seen per anggota dengan indikator warna</li>
+          <li>Aktif/nonaktifkan anggota tanpa hapus data</li>
+        </ul>
+      </div>
+      <div class="mockup-shell">
+        <div class="mockup-bar">
+          <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+          <div class="mockup-url">localhost:3000/admin/members</div>
+        </div>
+        <div class="app-mini">
+          <div class="app-layout">
+            <div class="app-sidebar">
+              <div class="app-logo-row">
+                <div class="app-logo-mark"><i class="ti ti-book"></i></div>
+                <div class="app-logo-text">WAPHafiz</div>
+              </div>
+              <div class="nav-item-mini"><i class="ti ti-layout-dashboard" style="font-size:13px"></i> Dashboard</div>
+              <div class="nav-item-mini"><i class="ti ti-book" style="font-size:13px"></i> Al-Qur'an</div>
+              <div class="nav-item-mini"><i class="ti ti-checklist" style="font-size:13px"></i> Hafalan</div>
+              <div class="nav-item-mini"><i class="ti ti-refresh" style="font-size:13px"></i> Muraja'ah</div>
+              <div class="nav-item-mini active"><i class="ti ti-users" style="font-size:13px"></i> Anggota</div>
+            </div>
+            <div class="app-content" style="padding:12px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+                <div style="font-size:12px;font-weight:700">Manajemen Anggota</div>
+                <span class="badge-mini badge-mini-green"><i class="ti ti-users" style="font-size:9px"></i> 8 Aktif</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;background:var(--gray-bg);border:1px solid var(--gray-border);border-radius:7px;padding:6px 10px">
+                <i class="ti ti-key" style="font-size:11px;color:var(--green)"></i>
+                <span style="font-size:9px;font-weight:700;letter-spacing:0.1em;color:var(--green-dark)">FMLY-2024</span>
+                <span style="font-size:8px;color:var(--text-tertiary);margin-left:4px">Kode Undangan</span>
+                <button style="margin-left:auto;background:none;border:1px solid var(--gray-border);border-radius:4px;padding:2px 6px;font-size:8px;color:var(--text-secondary);cursor:pointer">Copy</button>
+              </div>
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Anggota</th>
+                    <th>Progress</th>
+                    <th>Status</th>
+                    <th>Last Seen</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div style="display:flex;align-items:center;gap:6px">
+                        <div class="av-mini av-mini-green">AP</div>
+                        <div>
+                          <div style="font-weight:600">Abdullah P.</div>
+                          <span class="badge-mini badge-mini-green" style="font-size:8px">Admin</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div style="display:flex;align-items:center;gap:5px">
+                        <div class="prog-bar-bg-mini"><div class="prog-bar-mini" style="width:74%"></div></div>
+                        <span style="font-size:9px;color:var(--text-secondary)">74%</span>
+                      </div>
+                    </td>
+                    <td><span class="badge-mini badge-mini-green">Aktif</span></td>
+                    <td style="color:var(--text-secondary);font-size:9px">Hari ini</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div style="display:flex;align-items:center;gap:6px">
+                        <div class="av-mini av-mini-purple">SR</div>
+                        <div>Siti R.</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div style="display:flex;align-items:center;gap:5px">
+                        <div class="prog-bar-bg-mini"><div class="prog-bar-mini" style="width:37%"></div></div>
+                        <span style="font-size:9px;color:var(--text-secondary)">37%</span>
+                      </div>
+                    </td>
+                    <td><span class="badge-mini badge-mini-green">Aktif</span></td>
+                    <td style="color:var(--text-secondary);font-size:9px">Kemarin</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div style="display:flex;align-items:center;gap:6px">
+                        <div class="av-mini av-mini-amber">MF</div>
+                        <div>Muhammad F.</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div style="display:flex;align-items:center;gap:5px">
+                        <div class="prog-bar-bg-mini"><div class="prog-bar-mini" style="width:10%"></div></div>
+                        <span style="font-size:9px;color:var(--text-secondary)">10%</span>
+                      </div>
+                    </td>
+                    <td><span class="badge-mini badge-mini-amber">Aktif</span></td>
+                    <td style="color:var(--text-tertiary);font-size:9px">5 hari lalu</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── TECH STACK ─── -->
+<section class="section">
+  <div class="section-label">Arsitektur & Teknologi</div>
+  <div class="section-title">Stack yang proven dan production-ready</div>
+  <p class="section-sub">Setiap layer dipilih untuk kecepatan development, performa, dan kemudahan deploy mandiri.</p>
+
+  <div class="tech-grid">
+    <div class="tech-card">
+      <div class="tech-layer">Backend</div>
+      <div class="tech-name">Go · Fiber v2</div>
+      <div class="tech-detail">REST API dengan GORM ORM, clean architecture, JWT middleware</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-layer">Frontend</div>
+      <div class="tech-name">Nuxt 3 · Vue 3</div>
+      <div class="tech-detail">SSR/SPA hybrid, Pinia state, Tailwind CSS, Tabler Icons</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-layer">Database</div>
+      <div class="tech-name">PostgreSQL</div>
+      <div class="tech-detail">Relational DB dengan migrasi terstruktur via GORM AutoMigrate</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-layer">Cache & Session</div>
+      <div class="tech-name">Redis</div>
+      <div class="tech-detail">Cache Quran API 24 jam TTL, refresh token store</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-layer">Auth</div>
+      <div class="tech-name">JWT HS256</div>
+      <div class="tech-detail">Stateless auth dengan RBAC admin/member, invite-code gating</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-layer">External API</div>
+      <div class="tech-name">alquran.cloud</div>
+      <div class="tech-detail">Sumber data Quran & audio gratis, di-proxy dan di-cache backend</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-layer">DevOps</div>
+      <div class="tech-name">Docker Compose</div>
+      <div class="tech-detail">One-command dev setup, production deploy dengan Dockerfile multi-stage</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-layer">Typography</div>
+      <div class="tech-name">Inter + Amiri</div>
+      <div class="tech-detail">Inter untuk UI, Amiri RTL untuk teks Arab dengan rendering optimal</div>
+    </div>
+  </div>
+
+  <div class="arch-box">
+    <div style="text-align:center;margin-bottom:32px">
+      <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--green);margin-bottom:8px">Data Flow</div>
+      <div style="font-size:14px;color:rgba(255,255,255,0.5)">Semua request dari frontend melewati backend — tidak ada akses langsung ke DB atau API eksternal</div>
+    </div>
+    <div class="arch-diagram">
+      <div class="arch-node primary">
+        <div class="arch-node-title">Nuxt 3 Frontend</div>
+        <div class="arch-node-sub">Vue 3 · Pinia · Tailwind</div>
+      </div>
+      <div class="arch-arrow">
+        <div class="arch-arrow-line"></div>
+        <div class="arch-arrow-label">REST API · JWT Bearer</div>
+        <div class="arch-arrow-line"></div>
+      </div>
+      <div class="arch-node primary">
+        <div class="arch-node-title">Go Backend — :8080</div>
+        <div class="arch-node-sub">Fiber v2 · GORM · JWT RBAC</div>
+      </div>
+      <div class="arch-arrow">
+        <div class="arch-arrow-line" style="height:12px"></div>
+      </div>
+      <div class="arch-row">
+        <div class="arch-branch">
+          <div class="arch-node">
+            <div class="arch-node-title">PostgreSQL</div>
+            <div class="arch-node-sub">Users · Hafalan · Muraja'ah</div>
+          </div>
+        </div>
+        <div style="width:48px"></div>
+        <div class="arch-branch">
+          <div class="arch-node">
+            <div class="arch-node-title">Redis</div>
+            <div class="arch-node-sub">Cache API · Session</div>
+          </div>
+          <div class="arch-arrow">
+            <div class="arch-arrow-line"></div>
+            <div class="arch-arrow-label">cache miss</div>
+            <div class="arch-arrow-line"></div>
+          </div>
+          <div class="arch-node">
+            <div class="arch-node-title">alquran.cloud</div>
+            <div class="arch-node-sub">Quran data · Audio · TTL 24h</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── DATA MODEL ─── -->
+<section class="section">
+  <div class="section-label">Data Model</div>
+  <div class="section-title">Schema database yang bersih dan terstruktur</div>
+  <p class="section-sub">5 tabel utama yang saling berelasi — dirancang untuk query efisien dan migrasi mudah.</p>
+
+  <div class="model-grid">
+    <div class="model-card">
+      <div class="model-header">
+        <i class="ti ti-users model-icon"></i>
+        <div class="model-name">family_groups</div>
+      </div>
+      <div class="model-fields">
+        <div class="model-field"><span class="field-name">id</span><span class="field-pk">PK · uuid</span></div>
+        <div class="model-field"><span class="field-name">name</span><span class="field-type">string</span></div>
+        <div class="model-field"><span class="field-name">invite_code</span><span class="field-type">string · unique</span></div>
+        <div class="model-field"><span class="field-name">created_by</span><span class="field-fk">FK → users</span></div>
+        <div class="model-field"><span class="field-name">created_at</span><span class="field-type">timestamp</span></div>
+      </div>
+    </div>
+    <div class="model-card">
+      <div class="model-header">
+        <i class="ti ti-user model-icon"></i>
+        <div class="model-name">users</div>
+      </div>
+      <div class="model-fields">
+        <div class="model-field"><span class="field-name">id</span><span class="field-pk">PK · uuid</span></div>
+        <div class="model-field"><span class="field-name">name, email</span><span class="field-type">string</span></div>
+        <div class="model-field"><span class="field-name">password_hash</span><span class="field-type">string</span></div>
+        <div class="model-field"><span class="field-name">family_group_id</span><span class="field-fk">FK → family_groups</span></div>
+        <div class="model-field"><span class="field-name">role</span><span class="field-type">admin | member</span></div>
+        <div class="model-field"><span class="field-name">is_active</span><span class="field-type">boolean</span></div>
+      </div>
+    </div>
+    <div class="model-card">
+      <div class="model-header">
+        <i class="ti ti-checklist model-icon"></i>
+        <div class="model-name">hafalan_progress</div>
+      </div>
+      <div class="model-fields">
+        <div class="model-field"><span class="field-name">id</span><span class="field-pk">PK · uuid</span></div>
+        <div class="model-field"><span class="field-name">user_id</span><span class="field-fk">FK → users</span></div>
+        <div class="model-field"><span class="field-name">surah_number</span><span class="field-type">int</span></div>
+        <div class="model-field"><span class="field-name">ayat_start, ayat_end</span><span class="field-type">int</span></div>
+        <div class="model-field"><span class="field-name">status</span><span class="field-type">belum | sedang | hafal</span></div>
+        <div class="model-field"><span class="field-name">noted_at</span><span class="field-type">date</span></div>
+      </div>
+    </div>
+    <div class="model-card">
+      <div class="model-header">
+        <i class="ti ti-calendar-check model-icon"></i>
+        <div class="model-name">murajaah_schedule</div>
+      </div>
+      <div class="model-fields">
+        <div class="model-field"><span class="field-name">id</span><span class="field-pk">PK · uuid</span></div>
+        <div class="model-field"><span class="field-name">user_id</span><span class="field-fk">FK → users</span></div>
+        <div class="model-field"><span class="field-name">type</span><span class="field-type">sabqi | manzil</span></div>
+        <div class="model-field"><span class="field-name">surah_number, ayat_*</span><span class="field-type">int</span></div>
+        <div class="model-field"><span class="field-name">scheduled_date</span><span class="field-type">date</span></div>
+        <div class="model-field"><span class="field-name">completed_at</span><span class="field-type">timestamp?</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PORTFOLIO DESCRIPTIONS ─── -->
+<section class="section">
+  <div class="section-label">Deskripsi Portfolio</div>
+  <div class="section-title">Copy-paste untuk LinkedIn / portfolio site</div>
+
+  <div class="desc-grid">
+    <div class="desc-card">
+      <div class="desc-lang">Bahasa Indonesia</div>
+      <div class="desc-text">
+        <strong style="color:white">WAPHafiz</strong> adalah aplikasi web full-stack untuk membantu keluarga menghafal Al-Quran secara terstruktur. Dibangun dengan <strong style="color:white">Go (Fiber v2)</strong> di backend dan <strong style="color:white">Nuxt 3 (Vue 3)</strong> di frontend, aplikasi ini menerapkan metode hafalan pesantren Sabak–Sabqi–Manzil secara digital.
+        <br><br>
+        Fitur utama meliputi sistem muraja'ah otomatis (jadwal harian di-generate berdasarkan riwayat hafalan), tracker hafalan per ayat dengan status granular, audio Quran terintegrasi via proxy backend dengan cache Redis 24 jam, dan admin dashboard untuk memantau progress seluruh anggota keluarga.
+        <br><br>
+        Autentikasi menggunakan JWT HS256 dengan RBAC (admin/member) dan sistem invite code agar akses tetap privat untuk keluarga. Stack lengkap: Go · Fiber · GORM · PostgreSQL · Redis · Nuxt 3 · Tailwind · Docker.
+      </div>
+    </div>
+    <div class="desc-card">
+      <div class="desc-lang">English</div>
+      <div class="desc-text">
+        <strong style="color:white">WAPHafiz</strong> is a full-stack web application for families to memorize the Quran in a structured, systematic way. Built with <strong style="color:white">Go (Fiber v2)</strong> on the backend and <strong style="color:white">Nuxt 3 (Vue 3)</strong> on the frontend, it digitizes the traditional pesantren memorization method of Sabak–Sabqi–Manzil.
+        <br><br>
+        Key features include an automatic daily muraja'ah (revision) scheduling system, per-verse memorization tracking with granular status, integrated Quran audio playback via a backend proxy with 24-hour Redis caching, and an admin dashboard for monitoring all family members' progress.
+        <br><br>
+        Authentication uses JWT HS256 with RBAC (admin/member roles) and a family invite code system to keep the app private. Full stack: Go · Fiber · GORM · PostgreSQL · Redis · Nuxt 3 · Tailwind · Docker.
+      </div>
+    </div>
+  </div>
+
+  <!-- Short version -->
+  <div style="margin-top:20px">
+    <div class="desc-card" style="border-color:rgba(29,158,117,0.3);background:rgba(29,158,117,0.05)">
+      <div class="desc-lang">One-Liner (untuk tagline / card portfolio)</div>
+      <div class="desc-text">
+        Full-stack Quran memorization tracker for families — Go · Nuxt 3 · PostgreSQL · Redis — with automatic daily revision scheduling (Sabak–Sabqi–Manzil) and admin progress monitoring.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="footer-text">
+    Dibuat oleh <span class="footer-name">Abdullah Prasetio</span> · WAPHafiz v1 · 2026
+  </div>
+  <div style="font-size:11px;color:rgba(255,255,255,0.15);margin-top:6px">
+    Go · Fiber v2 · GORM · PostgreSQL · Redis · Nuxt 3 · Vue 3 · Tailwind CSS · Docker
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+version: "3.9"
+
+# ============================================================
+# WAPHafiz — Full Stack (ARM64 / CasaOS)
+#
+# Setup awal:
+#   1. cp .env.prod.example .env.prod
+#   2. Edit .env.prod — ganti STB_IP dengan IP STB kamu
+#   3. docker compose --env-file .env.prod up -d --build
+# ============================================================
+
+services:
+
+  # ── PostgreSQL ──────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-waphafiz}
+      POSTGRES_USER: ${DB_USER:-waphafiz}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-waphafiz} -d ${DB_NAME:-waphafiz}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis ───────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --save 60 1 --loglevel warning --requirepass ${REDIS_PASSWORD:-}
+    volumes:
+      - redis_data:/data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # ── Backend (Golang / Fiber) ────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      platforms:
+        - linux/arm64
+    restart: unless-stopped
+    environment:
+      APP_ENV: production
+      APP_PORT: 8080
+      APP_CORS_ALLOWED_ORIGINS: http://${STB_IP}:3000
+
+      DB_DRIVER: postgres
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-waphafiz}
+      DB_USER: ${DB_USER:-waphafiz}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_SSL_MODE: disable
+      DB_AUTO_MIGRATE: "true"
+
+      REDIS_URL: redis://:${REDIS_PASSWORD:-}@redis:6379
+
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_ISSUER: waphafiz
+      JWT_AUDIENCE: waphafiz-client
+      JWT_EXPIRY: 24h
+
+      OBSERVABILITY_PROVIDER: none
+      LOG_LEVEL: info
+      LOG_TO_FILE: "false"
+    ports:
+      - "8080:8080"
+    networks:
+      - internal
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 15s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+
+  # ── Frontend (Nuxt 3 / SSR) ─────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      platforms:
+        - linux/arm64
+      args:
+        # URL yang dipakai browser client — harus bisa dijangkau dari HP/laptop di jaringan
+        NUXT_PUBLIC_API_BASE: http://${STB_IP}:8080/api/v1
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOST: 0.0.0.0
+      # Runtime override — untuk server-side fetch (internal Docker network)
+      NUXT_PUBLIC_API_BASE: http://${STB_IP}:8080/api/v1
+    ports:
+      - "3000:3000"
+    networks:
+      - internal
+    depends_on:
+      backend:
+        condition: service_healthy
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:

@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WAPHafiz — Design Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1D9E75;
+    --green-light: #E1F5EE;
+    --green-mid: #5DCAA5;
+    --green-dark: #0F6E56;
+    --green-darker: #085041;
+    --blue-light: #E6F1FB;
+    --blue-mid: #185FA5;
+    --purple-light: #EEEDFE;
+    --purple-mid: #3C3489;
+    --amber-light: #FAEEDA;
+    --amber-mid: #633806;
+    --gray-bg: #F7F8FA;
+    --gray-surface: #FFFFFF;
+    --gray-border: #E5E7EB;
+    --gray-border-soft: #F0F2F5;
+    --text-primary: #111827;
+    --text-secondary: #6B7280;
+    --text-tertiary: #9CA3AF;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+  }
+
+  body { font-family: 'Inter', sans-serif; background: #ECEEF2; color: var(--text-primary); }
+  .arabic { font-family: 'Amiri', serif; }
+
+  /* ── NAV TABS ── */
+  .tab-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: white; border-bottom: 1px solid var(--gray-border);
+    display: flex; gap: 0; overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0; padding: 14px 20px; font-size: 13px; font-weight: 500;
+    color: var(--text-secondary); background: none; border: none;
+    border-bottom: 2px solid transparent; cursor: pointer;
+    white-space: nowrap; transition: all 0.15s;
+  }
+  .tab-btn.active { color: var(--green); border-bottom-color: var(--green); }
+  .tab-btn:hover:not(.active) { color: var(--text-primary); background: var(--gray-bg); }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── SHARED ── */
+  input, select, button { font-family: 'Inter', sans-serif; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; }
+  .badge-green { background: var(--green-light); color: var(--green-darker); }
+  .badge-blue { background: var(--blue-light); color: var(--blue-mid); }
+  .badge-amber { background: var(--amber-light); color: var(--amber-mid); }
+  .badge-gray { background: var(--gray-bg); color: var(--text-tertiary); }
+  .badge-purple { background: var(--purple-light); color: var(--purple-mid); }
+
+  .card {
+    background: var(--gray-surface); border: 1px solid var(--gray-border);
+    border-radius: var(--radius-lg); padding: 1.25rem;
+  }
+  .card-title { font-size: 14px; font-weight: 500; color: var(--text-primary); }
+  .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .card-link { font-size: 12px; color: var(--green); cursor: pointer; text-decoration: none; }
+
+  .avatar { border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 500; flex-shrink: 0; }
+  .av-green { background: var(--green-light); color: var(--green-dark); }
+  .av-purple { background: var(--purple-light); color: var(--purple-mid); }
+  .av-amber { background: var(--amber-light); color: var(--amber-mid); }
+  .av-blue { background: var(--blue-light); color: var(--blue-mid); }
+
+  .btn-primary {
+    background: var(--green); color: white; border: none;
+    border-radius: var(--radius-md); font-size: 14px; font-weight: 500;
+    padding: 10px 20px; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-primary:hover { background: var(--green-dark); }
+  .btn-outline {
+    background: transparent; color: var(--text-secondary);
+    border: 1px solid var(--gray-border); border-radius: var(--radius-md);
+    font-size: 13px; padding: 9px 16px; cursor: pointer;
+  }
+
+  .prog-bar-bg { background: var(--gray-bg); border-radius: 10px; overflow: hidden; }
+  .prog-bar { background: var(--green); border-radius: 10px; }
+
+  .form-field { margin-bottom: 1rem; }
+  .form-label { font-size: 12px; color: var(--text-secondary); display: block; margin-bottom: 5px; }
+  .input-wrap { position: relative; }
+  .input-wrap > i { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 16px; color: var(--text-tertiary); pointer-events: none; }
+  .form-input {
+    width: 100%; padding: 9px 12px 9px 36px;
+    border: 1px solid var(--gray-border); border-radius: var(--radius-md);
+    font-size: 13.5px; color: var(--text-primary); background: white;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .form-input:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(29,158,117,0.12); }
+  .form-select {
+    width: 100%; padding: 9px 12px;
+    border: 1px solid var(--gray-border); border-radius: var(--radius-md);
+    font-size: 13.5px; color: var(--text-primary); background: white;
+  }
+  .form-select:focus { outline: none; border-color: var(--green); }
+
+  /* ══════════════════════════════════════════
+     PAGE 1: LOGIN
+  ══════════════════════════════════════════ */
+  .auth-wrap {
+    min-height: 100vh; background: var(--gray-bg);
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem;
+  }
+  .auth-card {
+    background: white; border: 1px solid var(--gray-border);
+    border-radius: var(--radius-xl); padding: 2.5rem;
+    width: 100%; max-width: 400px;
+  }
+  .auth-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 2rem; }
+  .auth-logo-mark {
+    width: 40px; height: 40px; background: var(--green);
+    border-radius: var(--radius-md); display: flex; align-items: center;
+    justify-content: center; color: white; font-size: 16px; font-weight: 600;
+  }
+  .auth-logo-text { font-size: 20px; font-weight: 600; color: var(--text-primary); }
+  .auth-logo-text span { color: var(--green); }
+  .auth-heading { font-size: 22px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+  .auth-sub { font-size: 13.5px; color: var(--text-secondary); margin-bottom: 2rem; }
+  .auth-link-row { text-align: center; font-size: 13px; color: var(--text-secondary); margin-top: 1.25rem; }
+  .auth-link-row a { color: var(--green); text-decoration: none; font-weight: 500; }
+  .invite-info {
+    background: var(--green-light); border: 1px solid #9FE1CB;
+    border-radius: var(--radius-md); padding: 10px 14px;
+    display: flex; align-items: flex-start; gap: 8px;
+    margin-bottom: 1rem; font-size: 12.5px; color: var(--green-darker); line-height: 1.5;
+  }
+  .invite-info i { color: var(--green); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ══════════════════════════════════════════
+     PAGE 2: DASHBOARD
+  ══════════════════════════════════════════ */
+  .app-layout { display: flex; min-height: 100vh; }
+
+  .sidebar {
+    width: 224px; background: white; border-right: 1px solid var(--gray-border);
+    display: flex; flex-direction: column; flex-shrink: 0;
+    position: sticky; top: 49px; height: calc(100vh - 49px);
+  }
+  .sidebar-logo { padding: 1.25rem; border-bottom: 1px solid var(--gray-border); }
+  .sidebar-logo-text { font-size: 17px; font-weight: 600; color: var(--text-primary); }
+  .sidebar-logo-text span { color: var(--green); }
+  .sidebar-logo-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+
+  .sidebar-nav { padding: 0.75rem 0; flex: 1; overflow-y: auto; }
+  .nav-section { font-size: 10px; color: var(--text-tertiary); padding: 1rem 1.25rem 0.4rem; letter-spacing: 0.07em; text-transform: uppercase; }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px; padding: 9px 1.25rem;
+    font-size: 13.5px; color: var(--text-secondary); cursor: pointer;
+    border-left: 2px solid transparent; transition: all 0.12s;
+  }
+  .nav-item:hover { background: var(--gray-bg); color: var(--text-primary); }
+  .nav-item.active { color: var(--green); background: var(--green-light); border-left-color: var(--green); font-weight: 500; }
+  .nav-item i { font-size: 18px; }
+
+  .sidebar-user { padding: 1rem 1.25rem; border-top: 1px solid var(--gray-border); display: flex; align-items: center; gap: 10px; }
+  .sidebar-user-name { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+  .sidebar-user-role { font-size: 11px; color: var(--text-tertiary); }
+
+  .main-content { flex: 1; background: var(--gray-bg); padding: 2rem; overflow-y: auto; }
+  .page-header { margin-bottom: 1.5rem; }
+  .page-title-main { font-size: 20px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+  .page-sub-main { font-size: 13px; color: var(--text-secondary); }
+  .streak-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--amber-light); color: var(--amber-mid);
+    font-size: 12px; font-weight: 500; padding: 4px 10px;
+    border-radius: 20px; margin-top: 8px;
+  }
+
+  .reminder-bar {
+    background: var(--green-light); border: 1px solid #9FE1CB;
+    border-radius: var(--radius-md); padding: 11px 16px;
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 1.5rem; font-size: 13px; color: var(--green-darker);
+  }
+  .reminder-bar i { color: var(--green); font-size: 17px; flex-shrink: 0; }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+  .stat-card { background: white; border: 1px solid var(--gray-border); border-radius: var(--radius-lg); padding: 1rem 1.1rem; }
+  .stat-icon { font-size: 19px; color: var(--green); margin-bottom: 8px; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 5px; }
+  .stat-value { font-size: 22px; font-weight: 600; color: var(--text-primary); }
+  .stat-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 3px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+
+  .mj-item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--gray-border-soft); }
+  .mj-item:last-child { border-bottom: none; }
+  .mj-text { flex: 1; }
+  .mj-surah { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+  .mj-ayat { font-size: 11px; color: var(--text-secondary); }
+  .check-circle {
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 1.5px solid var(--gray-border); display: flex;
+    align-items: center; justify-content: center; font-size: 13px; color: var(--text-tertiary);
+    cursor: pointer; flex-shrink: 0;
+  }
+  .check-circle.done { background: var(--green); border-color: var(--green); color: white; }
+
+  .prog-item { margin-bottom: 11px; }
+  .prog-label-row { display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 5px; }
+  .prog-name { font-weight: 500; color: var(--text-primary); }
+  .prog-pct { color: var(--text-secondary); }
+
+  .member-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--gray-border-soft); }
+  .member-row:last-child { border-bottom: none; }
+  .member-name { flex: 1; font-size: 13px; font-weight: 500; color: var(--text-primary); }
+  .member-info { font-size: 12px; color: var(--text-secondary); }
+
+  /* ══════════════════════════════════════════
+     PAGE 3: QURAN
+  ══════════════════════════════════════════ */
+  .quran-page { background: var(--gray-bg); padding: 2rem; min-height: 100vh; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); margin-bottom: 1.25rem; cursor: pointer; text-decoration: none; }
+  .surah-header { background: white; border: 1px solid var(--gray-border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
+  .surah-meta { display: flex; justify-content: space-between; align-items: flex-start; }
+  .surah-name-id { font-size: 20px; font-weight: 600; color: var(--text-primary); }
+  .surah-name-info { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
+  .surah-name-ar { font-size: 32px; color: var(--green); direction: rtl; }
+  .surah-prog-wrap { max-width: 320px; margin-top: 1rem; }
+  .surah-prog-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-secondary); margin-bottom: 5px; }
+
+  .player-bar {
+    background: white; border: 1px solid var(--gray-border);
+    border-radius: var(--radius-lg); padding: 1rem 1.25rem;
+    margin-bottom: 1rem; display: flex; align-items: center; gap: 14px;
+  }
+  .play-btn {
+    width: 38px; height: 38px; border-radius: 50%; background: var(--green);
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 17px; cursor: pointer; flex-shrink: 0;
+    border: none;
+  }
+  .player-info { flex: 0 0 auto; }
+  .player-surah { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+  .player-qori { font-size: 11px; color: var(--text-secondary); }
+  .player-timeline { flex: 1; display: flex; align-items: center; gap: 8px; }
+  .timeline-bg { flex: 1; height: 3px; background: var(--gray-bg); border-radius: 10px; overflow: hidden; }
+  .timeline-fill { height: 3px; background: var(--green); width: 35%; }
+  .timeline-time { font-size: 11px; color: var(--text-tertiary); }
+  .qori-sel { font-size: 12px; color: var(--text-secondary); border: 1px solid var(--gray-border); border-radius: var(--radius-sm); padding: 5px 8px; background: white; }
+
+  .ayah-list { display: flex; flex-direction: column; gap: 8px; }
+  .ayah-card { background: white; border: 1px solid var(--gray-border); border-radius: var(--radius-lg); padding: 1.1rem 1.25rem; }
+  .ayah-card.playing { border-color: var(--green-mid); }
+  .ayah-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .ayah-num { width: 28px; height: 28px; border-radius: 50%; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; color: var(--green-dark); }
+  .ayah-actions { display: flex; align-items: center; gap: 10px; }
+  .ayah-btn { font-size: 16px; color: var(--text-tertiary); cursor: pointer; background: none; border: none; }
+  .ayah-btn.active { color: var(--green); }
+  .ayah-arabic { font-size: 24px; text-align: right; direction: rtl; line-height: 2; color: var(--text-primary); margin-bottom: 8px; }
+  .ayah-trans { font-size: 13px; color: var(--text-secondary); line-height: 1.65; }
+
+  /* ══════════════════════════════════════════
+     PAGE 4: HAFALAN TRACKER
+  ══════════════════════════════════════════ */
+  .hafalan-page { background: var(--gray-bg); padding: 2rem; min-height: 100vh; }
+  .toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .search-wrap { flex: 1; min-width: 160px; position: relative; }
+  .search-wrap i { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--text-tertiary); }
+  .search-input {
+    width: 100%; padding: 8px 10px 8px 34px; font-size: 13px;
+    border: 1px solid var(--gray-border); border-radius: var(--radius-md);
+    background: white; color: var(--text-primary);
+  }
+  .filter-btn {
+    padding: 8px 14px; border: 1px solid var(--gray-border);
+    border-radius: var(--radius-md); font-size: 12.5px; color: var(--text-secondary);
+    background: white; cursor: pointer;
+  }
+  .filter-btn.active { border-color: var(--green); background: var(--green-light); color: var(--green-dark); font-weight: 500; }
+
+  .juz-section { margin-bottom: 1.5rem; }
+  .juz-label { font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px; }
+  .surah-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 8px; }
+  .surah-card {
+    background: white; border: 1px solid var(--gray-border);
+    border-radius: var(--radius-lg); padding: 12px 14px; cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .surah-card:hover { border-color: var(--green-mid); }
+  .surah-card.hafal { border-color: var(--green-mid); }
+  .surah-card.sedang { border-color: #FAC775; }
+  .sc-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+  .sc-num { font-size: 11px; color: var(--text-tertiary); }
+  .sc-name { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 2px; }
+  .sc-ar { font-size: 15px; color: var(--text-secondary); text-align: right; direction: rtl; margin-bottom: 7px; }
+  .sc-info { font-size: 11px; color: var(--text-tertiary); margin-top: 4px; }
+
+  .modal-backdrop {
+    background: rgba(17,24,39,0.4); border-radius: var(--radius-lg);
+    padding: 2rem; display: flex; align-items: center; justify-content: center;
+    margin-top: 1.5rem;
+  }
+  .modal-box {
+    background: white; border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-border); padding: 1.5rem;
+    width: 100%; max-width: 380px;
+  }
+  .modal-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+  .modal-sub { font-size: 12.5px; color: var(--text-secondary); margin-bottom: 1.25rem; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .modal-actions { display: flex; gap: 8px; margin-top: 1.25rem; }
+
+  /* ══════════════════════════════════════════
+     PAGE 5: MURAJA'AH
+  ══════════════════════════════════════════ */
+  .murajaah-page { background: var(--gray-bg); padding: 2rem; min-height: 100vh; }
+  .summary-chips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+  .chip { background: white; border: 1px solid var(--gray-border); border-radius: var(--radius-md); padding: 12px 14px; }
+  .chip-val { font-size: 21px; font-weight: 600; color: var(--text-primary); }
+  .chip-label { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+  .section-label { font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px; margin-top: 1.25rem; }
+  .mj-card {
+    background: white; border: 1px solid var(--gray-border);
+    border-radius: var(--radius-lg); padding: 1rem 1.25rem;
+    margin-bottom: 8px; display: flex; align-items: center; gap: 14px;
+  }
+  .mj-card.done { opacity: 0.6; }
+  .mj-icon {
+    width: 40px; height: 40px; border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0;
+  }
+  .mj-icon.sabqi { background: var(--green-light); color: var(--green); }
+  .mj-icon.manzil { background: var(--blue-light); color: var(--blue-mid); }
+  .mj-body { flex: 1; }
+  .mj-surah-name { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-top: 3px; }
+  .mj-detail { font-size: 12px; color: var(--text-secondary); }
+  .mj-actions { display: flex; align-items: center; gap: 10px; }
+  .mj-play-btn { font-size: 17px; color: var(--text-tertiary); cursor: pointer; background: none; border: none; }
+  .mj-check-btn {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1.5px solid var(--gray-border); display: flex;
+    align-items: center; justify-content: center; font-size: 15px;
+    color: var(--text-tertiary); cursor: pointer; background: none;
+    transition: all 0.15s;
+  }
+  .mj-check-btn.done { background: var(--green); border-color: var(--green); color: white; }
+
+  /* ══════════════════════════════════════════
+     PAGE 6: ADMIN
+  ══════════════════════════════════════════ */
+  .admin-page { background: var(--gray-bg); padding: 2rem; min-height: 100vh; }
+  .admin-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+  .admin-top { display: flex; align-items: center; gap: 10px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .invite-chip {
+    display: flex; align-items: center; gap: 8px;
+    background: white; border: 1px solid var(--gray-border);
+    border-radius: var(--radius-md); padding: 8px 14px;
+    font-size: 12.5px; color: var(--text-secondary);
+  }
+  .invite-code { font-weight: 600; color: var(--green); font-size: 13px; letter-spacing: 0.05em; }
+  .icon-btn { font-size: 15px; color: var(--text-tertiary); cursor: pointer; background: none; border: none; }
+  .table-wrap {
+    background: white; border: 1px solid var(--gray-border);
+    border-radius: var(--radius-lg); overflow: hidden;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    text-align: left; padding: 10px 16px;
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    background: var(--gray-bg); border-bottom: 1px solid var(--gray-border);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  td { padding: 12px 16px; border-bottom: 1px solid var(--gray-border-soft); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--gray-bg); }
+  .member-cell { display: flex; align-items: center; gap: 10px; }
+  .member-cell-name { font-weight: 500; color: var(--text-primary); }
+  .member-cell-email { font-size: 11px; color: var(--text-tertiary); }
+  .prog-cell { display: flex; align-items: center; gap: 8px; }
+  .prog-cell-bar { width: 72px; height: 4px; background: var(--gray-bg); border-radius: 10px; overflow: hidden; }
+  .prog-cell-fill { height: 4px; background: var(--green); border-radius: 10px; }
+  .prog-cell-label { font-size: 12px; color: var(--text-secondary); }
+  .last-seen { font-size: 12px; color: var(--text-secondary); }
+  .last-seen.old { color: var(--text-tertiary); }
+
+  /* ══════════════════════════════════════════
+     PAGE 7: MOBILE
+  ══════════════════════════════════════════ */
+  .mobile-preview-wrap {
+    background: var(--gray-bg); padding: 2rem;
+    display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;
+  }
+  .device-frame {
+    width: 320px; background: white;
+    border: 1.5px solid var(--gray-border); border-radius: 32px;
+    overflow: hidden; flex-shrink: 0;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  }
+  .device-notch-bar {
+    height: 30px; background: white;
+    display: flex; align-items: center; justify-content: center;
+    border-bottom: 1px solid var(--gray-border-soft);
+  }
+  .device-notch { width: 72px; height: 10px; background: var(--gray-bg); border-radius: 10px; }
+  .mobile-screen { background: var(--gray-bg); }
+  .m-header {
+    background: white; padding: 13px 16px 11px;
+    border-bottom: 1px solid var(--gray-border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .m-logo-text { font-size: 15px; font-weight: 600; color: var(--text-primary); }
+  .m-logo-text span { color: var(--green); }
+  .m-body { padding: 14px; }
+  .m-greeting { font-size: 15px; font-weight: 500; color: var(--text-primary); }
+  .m-date { font-size: 11px; color: var(--text-tertiary); margin-bottom: 12px; }
+  .m-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+  .m-stat { background: white; border: 1px solid var(--gray-border); border-radius: 10px; padding: 10px; }
+  .m-stat-val { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+  .m-stat-label { font-size: 10px; color: var(--text-secondary); margin-top: 1px; }
+  .m-section { font-size: 12px; font-weight: 500; color: var(--text-primary); margin-bottom: 8px; }
+  .m-mj-item {
+    background: white; border: 1px solid var(--gray-border);
+    border-radius: 10px; padding: 10px 12px;
+    margin-bottom: 7px; display: flex; align-items: center; gap: 9px;
+  }
+  .m-mj-badge { font-size: 9px; padding: 2px 6px; border-radius: 20px; font-weight: 500; flex-shrink: 0; }
+  .m-mj-text { flex: 1; }
+  .m-mj-surah { font-size: 12px; font-weight: 500; color: var(--text-primary); }
+  .m-mj-ayat { font-size: 10px; color: var(--text-secondary); }
+  .m-check { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--gray-border); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-tertiary); flex-shrink: 0; }
+  .m-check.done { background: var(--green); border-color: var(--green); color: white; }
+  .m-bottom-nav {
+    background: white; border-top: 1px solid var(--gray-border);
+    display: flex; padding: 10px 0 16px;
+  }
+  .m-nav-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 9px; color: var(--text-tertiary); cursor: pointer; }
+  .m-nav-tab.active { color: var(--green); }
+  .m-nav-tab i { font-size: 20px; }
+
+  .mobile-notes { flex: 1; min-width: 240px; }
+  .notes-title { font-size: 16px; font-weight: 500; color: var(--text-primary); margin-bottom: 1rem; }
+  .note-point { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .note-point i { color: var(--green); font-size: 15px; margin-top: 1px; flex-shrink: 0; }
+  .code-note {
+    background: var(--green-light); border: 1px solid #9FE1CB;
+    border-radius: var(--radius-md); padding: 12px 14px;
+    font-size: 12px; color: var(--green-darker);
+    line-height: 1.6; margin-top: 1rem;
+  }
+  .code-note code { font-family: monospace; font-size: 11px; background: rgba(29,158,117,0.15); padding: 1px 5px; border-radius: 3px; }
+
+  /* ══════════════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════════════ */
+  @media (max-width: 768px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .summary-chips { grid-template-columns: 1fr 1fr; }
+    .admin-stats { grid-template-columns: 1fr 1fr; }
+    .sidebar { display: none; }
+    .surah-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    .player-bar { flex-wrap: wrap; }
+    .player-timeline { width: 100%; order: 3; }
+    table { font-size: 12px; }
+    th, td { padding: 8px 10px; }
+    .mobile-preview-wrap { flex-direction: column; }
+    .main-content { padding: 1.25rem; }
+    .quran-page, .hafalan-page, .murajaah-page, .admin-page { padding: 1.25rem; }
+  }
+  @media (max-width: 480px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .summary-chips { grid-template-columns: 1fr; }
+    .toolbar { flex-direction: column; align-items: stretch; }
+    .surah-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TAB NAVIGATION -->
+<nav class="tab-nav" role="tablist">
+  <button class="tab-btn active" onclick="showPage('login')" role="tab">Login</button>
+  <button class="tab-btn" onclick="showPage('register')" role="tab">Register</button>
+  <button class="tab-btn" onclick="showPage('dashboard')" role="tab">Dashboard</button>
+  <button class="tab-btn" onclick="showPage('quran')" role="tab">Al-Quran</button>
+  <button class="tab-btn" onclick="showPage('hafalan')" role="tab">Hafalan</button>
+  <button class="tab-btn" onclick="showPage('murajaah')" role="tab">Muraja'ah</button>
+  <button class="tab-btn" onclick="showPage('admin')" role="tab">Admin</button>
+  <button class="tab-btn" onclick="showPage('mobile')" role="tab">Mobile View</button>
+</nav>
+
+<!-- ══════════════ PAGE: LOGIN ══════════════ -->
+<div id="page-login" class="page active">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="auth-logo-mark">W</div>
+        <div class="auth-logo-text">WAP<span>Hafiz</span></div>
+      </div>
+      <div class="auth-heading">Masuk ke akun</div>
+      <div class="auth-sub">Selamat datang kembali, hafidz.</div>
+      <div class="form-field">
+        <label class="form-label">Email</label>
+        <div class="input-wrap">
+          <i class="ti ti-mail"></i>
+          <input class="form-input" type="email" placeholder="email@contoh.com" value="abdullah@gmail.com">
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Password</label>
+        <div class="input-wrap">
+          <i class="ti ti-lock"></i>
+          <input class="form-input" type="password" placeholder="Min. 8 karakter" value="••••••••">
+        </div>
+      </div>
+      <button class="btn-primary" style="width:100%;margin-top:0.5rem">Masuk</button>
+      <div class="auth-link-row">Belum punya akun? <a href="#">Daftar dengan kode undangan</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: REGISTER ══════════════ -->
+<div id="page-register" class="page">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="auth-logo-mark">W</div>
+        <div class="auth-logo-text">WAP<span>Hafiz</span></div>
+      </div>
+      <div class="auth-heading">Daftar akun baru</div>
+      <div class="auth-sub">Bergabung dengan keluarga hafidz.</div>
+      <div class="invite-info">
+        <i class="ti ti-key"></i>
+        Pendaftaran hanya dengan kode undangan dari admin keluarga.
+      </div>
+      <div class="form-field">
+        <label class="form-label">Kode undangan</label>
+        <div class="input-wrap">
+          <i class="ti ti-key"></i>
+          <input class="form-input" type="text" placeholder="Contoh: FAM-2026-XXXX" value="FAM-2026-AB3K">
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Nama lengkap</label>
+        <div class="input-wrap">
+          <i class="ti ti-user"></i>
+          <input class="form-input" type="text" placeholder="Nama kamu" value="Zainab Prasetio">
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Email</label>
+        <div class="input-wrap">
+          <i class="ti ti-mail"></i>
+          <input class="form-input" type="email" placeholder="email@contoh.com">
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Password</label>
+        <div class="input-wrap">
+          <i class="ti ti-lock"></i>
+          <input class="form-input" type="password" placeholder="Min. 8 karakter">
+        </div>
+      </div>
+      <button class="btn-primary" style="width:100%;margin-top:0.5rem">Buat Akun</button>
+      <div class="auth-link-row">Sudah punya akun? <a href="#">Masuk</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: DASHBOARD ══════════════ -->
+<div id="page-dashboard" class="page">
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-text">WAP<span>Hafiz</span></div>
+        <div class="sidebar-logo-sub">Hafalan Keluarga</div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-item active"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
+        <div class="nav-item"><i class="ti ti-book"></i> Al-Quran</div>
+        <div class="nav-item"><i class="ti ti-checklist"></i> Hafalan Saya</div>
+        <div class="nav-item"><i class="ti ti-refresh"></i> Muraja'ah</div>
+        <div class="nav-section">Admin</div>
+        <div class="nav-item"><i class="ti ti-users"></i> Anggota</div>
+        <div class="nav-item"><i class="ti ti-chart-bar"></i> Progress</div>
+        <div class="nav-item"><i class="ti ti-settings"></i> Pengaturan</div>
+      </nav>
+      <div class="sidebar-user">
+        <div class="avatar av-green" style="width:32px;height:32px;font-size:12px">AP</div>
+        <div>
+          <div class="sidebar-user-name">Abdullah</div>
+          <div class="sidebar-user-role">Admin</div>
+        </div>
+      </div>
+    </aside>
+    <main class="main-content">
+      <div class="page-header">
+        <div class="page-title-main">Assalamu'alaikum, Abdullah</div>
+        <div class="page-sub-main">Ahad, 14 Juni 2026</div>
+        <div class="streak-chip"><i class="ti ti-flame"></i> 12 hari streak</div>
+      </div>
+      <div class="reminder-bar">
+        <i class="ti ti-bell"></i>
+        Kamu belum menyelesaikan muraja'ah hari ini. Ada 2 sesi yang menunggu.
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon"><i class="ti ti-book-2"></i></div><div class="stat-label">Total Hafalan</div><div class="stat-value">4.5 Juz</div><div class="stat-sub">287 ayat</div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="ti ti-refresh"></i></div><div class="stat-label">Muraja'ah Hari Ini</div><div class="stat-value">1 / 3</div><div class="stat-sub">2 sesi tersisa</div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="ti ti-users"></i></div><div class="stat-label">Anggota Aktif</div><div class="stat-value">14</div><div class="stat-sub">dari 18 anggota</div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="ti ti-calendar-check"></i></div><div class="stat-label">Hafalan Bulan Ini</div><div class="stat-value">38 ayat</div><div class="stat-sub">↑ 12 dari bulan lalu</div></div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><span class="card-title">Muraja'ah Hari Ini</span><a class="card-link">Lihat semua →</a></div>
+          <div class="mj-item"><span class="badge badge-green">Sabqi</span><div class="mj-text"><div class="mj-surah">Al-Mulk</div><div class="mj-ayat">Ayat 1–15</div></div><div class="check-circle done"><i class="ti ti-check"></i></div></div>
+          <div class="mj-item"><span class="badge badge-blue">Manzil</span><div class="mj-text"><div class="mj-surah">Yasin</div><div class="mj-ayat">Ayat 1–20</div></div><div class="check-circle"><i class="ti ti-check"></i></div></div>
+          <div class="mj-item"><span class="badge badge-blue">Manzil</span><div class="mj-text"><div class="mj-surah">Al-Waqiah</div><div class="mj-ayat">Ayat 1–40</div></div><div class="check-circle"><i class="ti ti-check"></i></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Progress Hafalan Saya</span><a class="card-link">Detail →</a></div>
+          <div class="prog-item"><div class="prog-label-row"><span class="prog-name">Al-Mulk</span><span class="prog-pct">100%</span></div><div class="prog-bar-bg" style="height:5px"><div class="prog-bar" style="height:5px;width:100%"></div></div></div>
+          <div class="prog-item"><div class="prog-label-row"><span class="prog-name">Yasin</span><span class="prog-pct">74%</span></div><div class="prog-bar-bg" style="height:5px"><div class="prog-bar" style="height:5px;width:74%"></div></div></div>
+          <div class="prog-item"><div class="prog-label-row"><span class="prog-name">Al-Waqiah</span><span class="prog-pct">55%</span></div><div class="prog-bar-bg" style="height:5px"><div class="prog-bar" style="height:5px;width:55%"></div></div></div>
+          <div class="prog-item"><div class="prog-label-row"><span class="prog-name">Al-Kahf</span><span class="prog-pct">30%</span></div><div class="prog-bar-bg" style="height:5px"><div class="prog-bar" style="height:5px;width:30%"></div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-title">Progress Anggota Keluarga</span><a class="card-link">Lihat semua →</a></div>
+        <div class="member-row"><div class="avatar av-green" style="width:30px;height:30px;font-size:11px">FA</div><div class="member-name">Fatimah</div><div class="member-info">6 Juz · aktif hari ini</div></div>
+        <div class="member-row"><div class="avatar av-purple" style="width:30px;height:30px;font-size:11px">ZA</div><div class="member-name">Zainab</div><div class="member-info">5 Juz · aktif hari ini</div></div>
+        <div class="member-row"><div class="avatar av-amber" style="width:30px;height:30px;font-size:11px">UM</div><div class="member-name">Umar</div><div class="member-info">3.5 Juz · 2 hari lalu</div></div>
+        <div class="member-row"><div class="avatar av-green" style="width:30px;height:30px;font-size:11px">RH</div><div class="member-name">Rohanah</div><div class="member-info">2 Juz · aktif hari ini</div></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: QURAN ══════════════ -->
+<div id="page-quran" class="page">
+  <div class="quran-page">
+    <a class="back-link"><i class="ti ti-arrow-left"></i> Kembali ke daftar surah</a>
+    <div class="surah-header">
+      <div class="surah-meta">
+        <div>
+          <div class="surah-name-id">Yasin</div>
+          <div class="surah-name-info">Surah ke-36 · 83 ayat · Makkiyah</div>
+          <div class="surah-prog-wrap">
+            <div class="surah-prog-row"><span>Progress hafalan</span><span>74% · 61 dari 83 ayat</span></div>
+            <div class="prog-bar-bg" style="height:4px"><div class="prog-bar" style="height:4px;width:74%"></div></div>
+          </div>
+        </div>
+        <div class="surah-name-ar arabic">يس</div>
+      </div>
+    </div>
+    <div class="player-bar">
+      <button class="play-btn"><i class="ti ti-player-pause"></i></button>
+      <div class="player-info"><div class="player-surah">Yasin · Ayat 3</div><div class="player-qori">Mishary Rashid Alafasy</div></div>
+      <div class="player-timeline">
+        <span class="timeline-time">0:14</span>
+        <div class="timeline-bg"><div class="timeline-fill"></div></div>
+        <span class="timeline-time">0:38</span>
+      </div>
+      <select class="qori-sel"><option>Alafasy</option><option>Abdul Basit</option><option>Al-Husary</option></select>
+    </div>
+    <div class="ayah-list">
+      <div class="ayah-card">
+        <div class="ayah-top">
+          <div class="ayah-num">1</div>
+          <div class="ayah-actions">
+            <span class="badge badge-green"><i class="ti ti-check"></i> Hafal</span>
+            <button class="ayah-btn"><i class="ti ti-player-play"></i></button>
+            <button class="ayah-btn active"><i class="ti ti-bookmark"></i></button>
+          </div>
+        </div>
+        <div class="ayah-arabic arabic">يسٓ</div>
+        <div class="ayah-trans">Yaa Siin.</div>
+      </div>
+      <div class="ayah-card">
+        <div class="ayah-top">
+          <div class="ayah-num">2</div>
+          <div class="ayah-actions">
+            <span class="badge badge-green"><i class="ti ti-check"></i> Hafal</span>
+            <button class="ayah-btn"><i class="ti ti-player-play"></i></button>
+            <button class="ayah-btn active"><i class="ti ti-bookmark"></i></button>
+          </div>
+        </div>
+        <div class="ayah-arabic arabic">وَٱلْقُرْءَانِ ٱلْحَكِيمِ</div>
+        <div class="ayah-trans">Demi Al-Quran yang penuh hikmah.</div>
+      </div>
+      <div class="ayah-card playing">
+        <div class="ayah-top">
+          <div class="ayah-num">3</div>
+          <div class="ayah-actions">
+            <button class="ayah-btn active"><i class="ti ti-player-pause"></i></button>
+            <button class="ayah-btn"><i class="ti ti-bookmark"></i></button>
+          </div>
+        </div>
+        <div class="ayah-arabic arabic">إِنَّكَ لَمِنَ ٱلْمُرْسَلِينَ</div>
+        <div class="ayah-trans">Sungguh, kamu adalah salah seorang dari rasul-rasul.</div>
+      </div>
+      <div class="ayah-card">
+        <div class="ayah-top">
+          <div class="ayah-num">4</div>
+          <div class="ayah-actions">
+            <button class="ayah-btn"><i class="ti ti-player-play"></i></button>
+            <button class="ayah-btn"><i class="ti ti-bookmark"></i></button>
+          </div>
+        </div>
+        <div class="ayah-arabic arabic">عَلَىٰ صِرَٰطٍ مُّسْتَقِيمٍ</div>
+        <div class="ayah-trans">Di atas jalan yang lurus.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: HAFALAN ══════════════ -->
+<div id="page-hafalan" class="page">
+  <div class="hafalan-page">
+    <div class="page-header">
+      <div class="page-title-main">Hafalan Saya</div>
+      <div class="page-sub-main">Catat dan pantau progress hafalan per surah</div>
+    </div>
+    <div class="toolbar">
+      <div class="search-wrap"><i class="ti ti-search"></i><input class="search-input" type="text" placeholder="Cari surah..."></div>
+      <button class="filter-btn active">Semua</button>
+      <button class="filter-btn">Hafal</button>
+      <button class="filter-btn">Sedang</button>
+      <button class="filter-btn">Belum</button>
+      <button class="btn-primary"><i class="ti ti-plus"></i> Tambah Hafalan</button>
+    </div>
+    <div class="juz-section">
+      <div class="juz-label">Juz 29</div>
+      <div class="surah-grid">
+        <div class="surah-card hafal">
+          <div class="sc-top"><span class="sc-num">67</span><span class="badge badge-green">Hafal</span></div>
+          <div class="sc-name">Al-Mulk</div>
+          <div class="sc-ar arabic">الملك</div>
+          <div class="prog-bar-bg" style="height:3px;margin-bottom:5px"><div class="prog-bar" style="height:3px;width:100%"></div></div>
+          <div class="sc-info">30 / 30 ayat</div>
+        </div>
+        <div class="surah-card sedang">
+          <div class="sc-top"><span class="sc-num">68</span><span class="badge badge-amber">Sedang</span></div>
+          <div class="sc-name">Al-Qalam</div>
+          <div class="sc-ar arabic">القلم</div>
+          <div class="prog-bar-bg" style="height:3px;margin-bottom:5px"><div class="prog-bar" style="height:3px;width:45%;background:#EF9F27"></div></div>
+          <div class="sc-info">24 / 52 ayat</div>
+        </div>
+        <div class="surah-card">
+          <div class="sc-top"><span class="sc-num">69</span><span class="badge badge-gray">Belum</span></div>
+          <div class="sc-name">Al-Haqqah</div>
+          <div class="sc-ar arabic">الحاقة</div>
+          <div class="prog-bar-bg" style="height:3px;margin-bottom:5px"><div class="prog-bar" style="height:3px;width:0%"></div></div>
+          <div class="sc-info">0 / 52 ayat</div>
+        </div>
+      </div>
+    </div>
+    <div class="juz-section">
+      <div class="juz-label">Juz 22–23</div>
+      <div class="surah-grid">
+        <div class="surah-card sedang">
+          <div class="sc-top"><span class="sc-num">36</span><span class="badge badge-amber">Sedang</span></div>
+          <div class="sc-name">Yasin</div>
+          <div class="sc-ar arabic">يس</div>
+          <div class="prog-bar-bg" style="height:3px;margin-bottom:5px"><div class="prog-bar" style="height:3px;width:74%;background:#EF9F27"></div></div>
+          <div class="sc-info">61 / 83 ayat</div>
+        </div>
+        <div class="surah-card sedang">
+          <div class="sc-top"><span class="sc-num">56</span><span class="badge badge-amber">Sedang</span></div>
+          <div class="sc-name">Al-Waqiah</div>
+          <div class="sc-ar arabic">الواقعة</div>
+          <div class="prog-bar-bg" style="height:3px;margin-bottom:5px"><div class="prog-bar" style="height:3px;width:55%;background:#EF9F27"></div></div>
+          <div class="sc-info">51 / 96 ayat</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop">
+      <div class="modal-box">
+        <div class="modal-title">Tambah hafalan baru</div>
+        <div class="modal-sub">Pilih surah dan rentang ayat yang sudah dihafal</div>
+        <div class="form-field"><label class="form-label">Surah</label><select class="form-select"><option>Al-Kahf (18)</option><option>Maryam (19)</option><option>Taha (20)</option></select></div>
+        <div class="row-2 form-field">
+          <div><label class="form-label">Ayat mulai</label><input class="form-input" type="number" value="1" min="1" style="padding-left:12px"></div>
+          <div><label class="form-label">Ayat selesai</label><input class="form-input" type="number" value="10" min="1" style="padding-left:12px"></div>
+        </div>
+        <div class="form-field"><label class="form-label">Status</label><select class="form-select"><option>Hafal</option><option>Sedang dihafal</option></select></div>
+        <div class="modal-actions">
+          <button class="btn-outline" style="flex:1">Batal</button>
+          <button class="btn-primary" style="flex:1">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: MURAJA'AH ══════════════ -->
+<div id="page-murajaah" class="page">
+  <div class="murajaah-page">
+    <div class="page-header">
+      <div class="page-title-main">Muraja'ah</div>
+      <div class="page-sub-main">Jadwal pengulangan hafalan hari ini, Ahad 14 Juni 2026</div>
+    </div>
+    <div class="summary-chips">
+      <div class="chip"><div class="chip-val">1 / 3</div><div class="chip-label">Selesai hari ini</div></div>
+      <div class="chip"><div class="chip-val">1</div><div class="chip-label">Sesi Sabqi</div></div>
+      <div class="chip"><div class="chip-val">2</div><div class="chip-label">Sesi Manzil</div></div>
+      <div class="chip"><div class="chip-val">75 ayat</div><div class="chip-label">Total hari ini</div></div>
+    </div>
+    <div class="section-label">Sabqi — hafalan 7 hari terakhir</div>
+    <div class="mj-card done">
+      <div class="mj-icon sabqi"><i class="ti ti-refresh"></i></div>
+      <div class="mj-body"><div><span class="badge badge-green">Sabqi</span></div><div class="mj-surah-name">Al-Mulk</div><div class="mj-detail">Ayat 1–15 · Dihafal 3 hari lalu</div></div>
+      <div class="mj-actions"><button class="mj-play-btn"><i class="ti ti-player-play"></i></button><button class="mj-check-btn done"><i class="ti ti-check"></i></button></div>
+    </div>
+    <div class="section-label">Manzil — siklus hafalan lama</div>
+    <div class="mj-card">
+      <div class="mj-icon manzil"><i class="ti ti-book-2"></i></div>
+      <div class="mj-body"><div><span class="badge badge-blue">Manzil</span></div><div class="mj-surah-name">Yasin</div><div class="mj-detail">Ayat 1–20 · Siklus 7 hari</div></div>
+      <div class="mj-actions"><button class="mj-play-btn"><i class="ti ti-player-play"></i></button><button class="mj-check-btn"><i class="ti ti-check"></i></button></div>
+    </div>
+    <div class="mj-card">
+      <div class="mj-icon manzil"><i class="ti ti-book-2"></i></div>
+      <div class="mj-body"><div><span class="badge badge-blue">Manzil</span></div><div class="mj-surah-name">Al-Waqiah</div><div class="mj-detail">Ayat 1–40 · Siklus 7 hari</div></div>
+      <div class="mj-actions"><button class="mj-play-btn"><i class="ti ti-player-play"></i></button><button class="mj-check-btn"><i class="ti ti-check"></i></button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: ADMIN ══════════════ -->
+<div id="page-admin" class="page">
+  <div class="admin-page">
+    <div class="page-header">
+      <div class="page-title-main">Manajemen Anggota</div>
+      <div class="page-sub-main">Kelola anggota keluarga dan pantau aktivitas mereka</div>
+    </div>
+    <div class="admin-stats">
+      <div class="stat-card"><div class="stat-label">Total anggota</div><div class="stat-value">18</div></div>
+      <div class="stat-card"><div class="stat-label">Aktif hari ini</div><div class="stat-value">14</div></div>
+      <div class="stat-card"><div class="stat-label">Tidak aktif 7 hari</div><div class="stat-value">3</div></div>
+      <div class="stat-card"><div class="stat-label">Rata-rata hafalan</div><div class="stat-value">4.2 Juz</div></div>
+    </div>
+    <div class="admin-top">
+      <div class="search-wrap" style="flex:1"><i class="ti ti-search"></i><input class="search-input" type="text" placeholder="Cari nama atau email..."></div>
+      <div class="invite-chip">
+        <i class="ti ti-key" style="color:var(--green)"></i>
+        Kode undangan: <span class="invite-code">FAM-2026-AB3K</span>
+        <button class="icon-btn"><i class="ti ti-copy"></i></button>
+        <button class="icon-btn"><i class="ti ti-refresh"></i></button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Anggota</th><th>Role</th><th>Status</th><th>Hafalan</th><th>Terakhir aktif</th><th></th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="member-cell"><div class="avatar av-green" style="width:32px;height:32px;font-size:11px">AP</div><div><div class="member-cell-name">Abdullah Prasetio</div><div class="member-cell-email">abdullah@gmail.com</div></div></div></td>
+            <td><span class="badge badge-purple">Admin</span></td>
+            <td><span class="badge badge-green">Aktif</span></td>
+            <td><div class="prog-cell"><div class="prog-cell-bar"><div class="prog-cell-fill" style="width:75%"></div></div><span class="prog-cell-label">4.5 Juz</span></div></td>
+            <td><span class="last-seen">Hari ini</span></td>
+            <td><button class="icon-btn"><i class="ti ti-dots"></i></button></td>
+          </tr>
+          <tr>
+            <td><div class="member-cell"><div class="avatar av-purple" style="width:32px;height:32px;font-size:11px">FA</div><div><div class="member-cell-name">Fatimah</div><div class="member-cell-email">fatimah@gmail.com</div></div></div></td>
+            <td><span class="badge badge-gray">Anggota</span></td>
+            <td><span class="badge badge-green">Aktif</span></td>
+            <td><div class="prog-cell"><div class="prog-cell-bar"><div class="prog-cell-fill" style="width:100%"></div></div><span class="prog-cell-label">6 Juz</span></div></td>
+            <td><span class="last-seen">Hari ini</span></td>
+            <td><button class="icon-btn"><i class="ti ti-dots"></i></button></td>
+          </tr>
+          <tr>
+            <td><div class="member-cell"><div class="avatar av-amber" style="width:32px;height:32px;font-size:11px">ZA</div><div><div class="member-cell-name">Zainab</div><div class="member-cell-email">zainab@gmail.com</div></div></div></td>
+            <td><span class="badge badge-gray">Anggota</span></td>
+            <td><span class="badge badge-green">Aktif</span></td>
+            <td><div class="prog-cell"><div class="prog-cell-bar"><div class="prog-cell-fill" style="width:83%"></div></div><span class="prog-cell-label">5 Juz</span></div></td>
+            <td><span class="last-seen">Hari ini</span></td>
+            <td><button class="icon-btn"><i class="ti ti-dots"></i></button></td>
+          </tr>
+          <tr>
+            <td><div class="member-cell"><div class="avatar av-blue" style="width:32px;height:32px;font-size:11px">UM</div><div><div class="member-cell-name">Umar</div><div class="member-cell-email">umar@gmail.com</div></div></div></td>
+            <td><span class="badge badge-gray">Anggota</span></td>
+            <td><span class="badge badge-gray">Tidak aktif</span></td>
+            <td><div class="prog-cell"><div class="prog-cell-bar"><div class="prog-cell-fill" style="width:58%"></div></div><span class="prog-cell-label">3.5 Juz</span></div></td>
+            <td><span class="last-seen old">2 hari lalu</span></td>
+            <td><button class="icon-btn"><i class="ti ti-dots"></i></button></td>
+          </tr>
+          <tr>
+            <td><div class="member-cell"><div class="avatar av-green" style="width:32px;height:32px;font-size:11px">RH</div><div><div class="member-cell-name">Rohanah</div><div class="member-cell-email">rohanah@gmail.com</div></div></div></td>
+            <td><span class="badge badge-gray">Anggota</span></td>
+            <td><span class="badge badge-green">Aktif</span></td>
+            <td><div class="prog-cell"><div class="prog-cell-bar"><div class="prog-cell-fill" style="width:33%"></div></div><span class="prog-cell-label">2 Juz</span></div></td>
+            <td><span class="last-seen">Hari ini</span></td>
+            <td><button class="icon-btn"><i class="ti ti-dots"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: MOBILE ══════════════ -->
+<div id="page-mobile" class="page">
+  <div class="mobile-preview-wrap">
+    <div class="device-frame">
+      <div class="device-notch-bar"><div class="device-notch"></div></div>
+      <div class="mobile-screen">
+        <div class="m-header">
+          <div class="m-logo-text">WAP<span>Hafiz</span></div>
+          <div class="avatar av-green" style="width:28px;height:28px;font-size:10px">AP</div>
+        </div>
+        <div class="m-body">
+          <div class="m-greeting">Assalamu'alaikum, Abdullah</div>
+          <div class="m-date">Ahad, 14 Juni 2026</div>
+          <div class="m-stats">
+            <div class="m-stat"><div class="m-stat-val">4.5 Juz</div><div class="m-stat-label">Total hafalan</div></div>
+            <div class="m-stat"><div class="m-stat-val">1 / 3</div><div class="m-stat-label">Muraja'ah hari ini</div></div>
+          </div>
+          <div class="m-section">Muraja'ah hari ini</div>
+          <div class="m-mj-item"><span class="m-mj-badge badge-green">Sabqi</span><div class="m-mj-text"><div class="m-mj-surah">Al-Mulk</div><div class="m-mj-ayat">Ayat 1–15</div></div><div class="m-check done"><i class="ti ti-check"></i></div></div>
+          <div class="m-mj-item"><span class="m-mj-badge badge-blue">Manzil</span><div class="m-mj-text"><div class="m-mj-surah">Yasin</div><div class="m-mj-ayat">Ayat 1–20</div></div><div class="m-check"><i class="ti ti-check"></i></div></div>
+          <div class="m-mj-item"><span class="m-mj-badge badge-blue">Manzil</span><div class="m-mj-text"><div class="m-mj-surah">Al-Waqiah</div><div class="m-mj-ayat">Ayat 1–40</div></div><div class="m-check"><i class="ti ti-check"></i></div></div>
+        </div>
+        <div class="m-bottom-nav">
+          <div class="m-nav-tab active"><i class="ti ti-layout-dashboard"></i>Dashboard</div>
+          <div class="m-nav-tab"><i class="ti ti-book"></i>Quran</div>
+          <div class="m-nav-tab"><i class="ti ti-checklist"></i>Hafalan</div>
+          <div class="m-nav-tab"><i class="ti ti-refresh"></i>Muraja'ah</div>
+          <div class="m-nav-tab"><i class="ti ti-user"></i>Profil</div>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-notes">
+      <div class="notes-title">Panduan responsive di Nuxt</div>
+      <div class="note-point"><i class="ti ti-check"></i>Sidebar desktop → bottom navigation bar di mobile</div>
+      <div class="note-point"><i class="ti ti-check"></i>Stats grid 4 kolom → 2 kolom di layar kecil</div>
+      <div class="note-point"><i class="ti ti-check"></i>Tabel anggota → card list di mobile</div>
+      <div class="note-point"><i class="ti ti-check"></i>Surah grid auto-fit: 3 kolom desktop, 2 mobile</div>
+      <div class="note-point"><i class="ti ti-check"></i>Audio player collapse ke mini-bar bawah layar</div>
+      <div class="note-point"><i class="ti ti-check"></i>Font Arab tetap terbaca di semua ukuran layar</div>
+      <div class="code-note">
+        Di Nuxt + Tailwind, gunakan breakpoint <code>md:</code>:<br><br>
+        Sidebar: <code>hidden md:flex</code><br>
+        Bottom nav: <code>flex md:hidden</code><br>
+        Stats grid: <code>grid-cols-2 md:grid-cols-4</code><br>
+        Surah grid: <code>grid-cols-2 md:grid-cols-3 lg:grid-cols-4</code>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
