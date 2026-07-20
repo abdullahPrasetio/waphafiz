@@ -44,16 +44,32 @@
       <ClientOnly>
         <div class="p-4 border-t border-gray-200 flex items-center gap-2.5">
           <AppAvatar :name="authStore.user?.name || ''" size="sm" />
-          <div>
-            <div class="text-[13px] font-medium text-gray-900">{{ authStore.user?.name }}</div>
+          <div class="flex-1 min-w-0">
+            <div class="text-[13px] font-medium text-gray-900 truncate">{{ authStore.user?.name }}</div>
             <div class="text-[11px] text-gray-400 capitalize">{{ authStore.user?.role }}</div>
           </div>
+          <button
+            class="text-gray-400 hover:text-red-500 border-none bg-none flex-shrink-0"
+            title="Keluar"
+            @click="handleLogout">
+            <IconLogout :size="17" />
+          </button>
         </div>
       </ClientOnly>
     </aside>
 
+    <!-- Top bar mobile -->
+    <header class="md:hidden fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
+      <div class="text-[15px] font-semibold text-gray-900">
+        WAP<span class="text-green-500">Hafiz</span>
+      </div>
+      <button class="text-gray-400 hover:text-red-500 border-none bg-none" title="Keluar" @click="handleLogout">
+        <IconLogout :size="19" />
+      </button>
+    </header>
+
     <!-- Main -->
-    <main class="flex-1 bg-gray-50 overflow-y-auto pb-20 md:pb-0">
+    <main class="flex-1 bg-gray-50 overflow-y-auto pb-20 md:pb-0 pt-14 md:pt-0">
       <slot />
     </main>
 
@@ -83,8 +99,20 @@
 <script setup lang="ts">
 import {
   IconLayoutDashboard, IconBook, IconChecklist,
-  IconRefresh, IconUsers, IconChartBar,
+  IconRefresh, IconUsers, IconChartBar, IconLogout,
 } from '@tabler/icons-vue'
 
 const authStore = useAuthStore()
+
+async function handleLogout() {
+  const ok = await useConfirm().confirm({
+    title: 'Keluar dari akun?',
+    message: 'Kamu perlu login kembali untuk mengakses aplikasi.',
+    confirmText: 'Keluar',
+    variant: 'danger',
+  })
+  if (!ok) return
+  authStore.logout()
+  navigateTo('/login')
+}
 </script>
