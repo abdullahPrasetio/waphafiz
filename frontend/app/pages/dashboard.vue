@@ -1,13 +1,22 @@
 <template>
   <div class="p-5 md:p-8">
     <!-- Header -->
-    <div class="mb-6">
-      <h1 class="text-xl font-semibold">Assalamu'alaikum, {{ authStore.user?.name?.split(' ')[0] }}</h1>
-      <p class="text-[13px] text-gray-500 mt-0.5">{{ today }}</p>
-      <div v-if="streak > 0" class="inline-flex items-center gap-1.5 bg-amber-50 text-amber-900 text-xs font-medium px-3 py-1 rounded-full mt-2">
-        <IconFlame :size="13" /> {{ streak }} hari streak
+    <div class="mb-6 flex items-start justify-between gap-3">
+      <div>
+        <h1 class="text-xl font-semibold">Assalamu'alaikum, {{ authStore.user?.name?.split(' ')[0] }}</h1>
+        <p class="text-[13px] text-gray-500 mt-0.5">{{ today }}</p>
+        <div v-if="streak > 0" class="inline-flex items-center gap-1.5 bg-amber-50 text-amber-900 text-xs font-medium px-3 py-1 rounded-full mt-2">
+          <IconFlame :size="13" /> {{ streak }} hari streak
+        </div>
       </div>
+      <button
+        class="flex items-center gap-1.5 text-[12.5px] font-medium text-green-600 bg-white border border-gray-200 hover:border-green-300 rounded-[10px] px-3 py-2 flex-shrink-0"
+        @click="shareModalOpen = true">
+        <IconShare :size="15" /> <span class="hidden md:inline">Link Pantau</span>
+      </button>
     </div>
+
+    <ShareManagerModal :open="shareModalOpen" :member-name="authStore.user?.name" @close="shareModalOpen = false" />
 
     <!-- Reminder muraja'ah -->
     <div v-if="!murajaahStore.allDone && murajaahStore.totalCount > 0" class="bg-green-50 border border-green-200 rounded-[10px] px-4 py-3 flex items-center gap-2.5 mb-6 text-[13px] text-green-900">
@@ -93,7 +102,7 @@
 <script setup lang="ts">
 import {
   IconFlame, IconBell, IconBook2, IconRefresh,
-  IconUsers, IconCalendarCheck, IconCheck,
+  IconUsers, IconCalendarCheck, IconCheck, IconShare,
 } from '@tabler/icons-vue'
 
 definePageMeta({ middleware: 'auth' })
@@ -123,6 +132,7 @@ const hafalanBySurah = computed(() => {
 })
 
 const streak = ref(0)
+const shareModalOpen = ref(false)
 const today = new Date().toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
 
 onMounted(async () => {

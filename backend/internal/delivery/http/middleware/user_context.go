@@ -54,3 +54,9 @@ func GetFamilyGroupID(c *fiber.Ctx) uuid.UUID {
 	v, _ := c.Locals(LocalFamilyGroupID).(uuid.UUID)
 	return v
 }
+
+// GetUserRole extracts the user role string from Fiber locals.
+func GetUserRole(c *fiber.Ctx) string {
+	v, _ := c.Locals(LocalUserRole).(string)
+	return v
+}

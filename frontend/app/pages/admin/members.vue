@@ -77,17 +77,29 @@
             <td class="px-4 py-3 text-gray-500">-</td>
             <td class="px-4 py-3 text-[12px] text-gray-500">{{ m.last_seen || '-' }}</td>
             <td class="px-4 py-3">
-              <button class="text-gray-400 hover:text-gray-600 border-none bg-none"><IconDots :size="15" /></button>
+              <div class="flex items-center gap-2 justify-end">
+                <button class="text-gray-400 hover:text-green-500 border-none bg-none" title="Link pantau"
+                  @click="openShareModal(m)">
+                  <IconShare :size="15" />
+                </button>
+                <button class="text-gray-400 hover:text-gray-600 border-none bg-none"><IconDots :size="15" /></button>
+              </div>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+
+    <ShareManagerModal
+      :open="shareModalOpen"
+      :user-id="shareTarget?.id"
+      :member-name="shareTarget?.name"
+      @close="shareModalOpen = false" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { IconSearch, IconKey, IconCopy, IconRefresh, IconDots } from '@tabler/icons-vue'
+import { IconSearch, IconKey, IconCopy, IconRefresh, IconDots, IconShare } from '@tabler/icons-vue'
 
 definePageMeta({ middleware: 'auth' })
 
@@ -105,6 +117,13 @@ const members = ref<Member[]>([])
 const loading = ref(false)
 const search = ref('')
 const inviteCode = ref('FAM-2026-????')
+const shareModalOpen = ref(false)
+const shareTarget = ref<Member | null>(null)
+
+function openShareModal(m: Member) {
+  shareTarget.value = m
+  shareModalOpen.value = true
+}
 
 const activeCount = computed(() => members.value.filter((m) => m.is_active).length)
 const inactiveCount = computed(() => members.value.filter((m) => !m.is_active).length)
@@ -130,7 +149,12 @@ async function copyCode() {
 }
 
 async function regenerateCode() {
-  if (!confirm('Generate ulang kode undangan? Kode lama tidak bisa dipakai lagi.')) return
+  const ok = await useConfirm().confirm({
+    title: 'Generate ulang kode undangan?',
+    message: 'Kode lama tidak bisa dipakai lagi.',
+    confirmText: 'Generate ulang',
+  })
+  if (!ok) return
   try {
     const res = await apiFetch<{ data: { invite_code: string } }>('/family/invite-code/regenerate', { method: 'POST' })
     inviteCode.value = res.data.invite_code

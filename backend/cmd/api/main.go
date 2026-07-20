@@ -18,6 +18,7 @@ import (
 	"github.com/abdullahPrasetio/waphafiz/internal/delivery/http/route"
 	"github.com/abdullahPrasetio/waphafiz/internal/domain/entity"
 	dbrepo "github.com/abdullahPrasetio/waphafiz/internal/repository/db"
+	redisrepo "github.com/abdullahPrasetio/waphafiz/internal/repository/redis"
 	"github.com/abdullahPrasetio/waphafiz/internal/usecase"
 	"github.com/abdullahPrasetio/waphafiz/pkg/auth"
 	"github.com/abdullahPrasetio/waphafiz/pkg/database"
@@ -72,6 +73,7 @@ func main() {
 			&entity.HafalanProgress{},
 			&entity.MurajaahSchedule{},
 			&entity.MurajaahLog{},
+			&entity.DashboardShare{},
 		); err != nil {
 			log.Fatal().Err(err).Msg("auto-migrate failed")
 		}
@@ -95,6 +97,7 @@ func main() {
 	familyRepo := dbrepo.NewFamilyGroupRepository(db)
 	hafalanRepo := dbrepo.NewHafalanRepository(db)
 	murajaahRepo := dbrepo.NewMurajaahRepository(db)
+	shareRepo := dbrepo.NewShareRepository(db)
 
 	// Usecases
 	authUC := usecase.NewAuthUseCase(userRepo, familyRepo, jwtCfg)
@@ -105,6 +108,8 @@ func main() {
 	murajaahUC := usecase.NewMurajaahUseCase(murajaahRepo, hafalanRepo)
 	dashboardUC := usecase.NewDashboardUseCase(hafalanRepo, familyRepo, murajaahRepo)
 	userUC := usecase.NewUserUseCase(userRepo)
+	shareCache := redisrepo.New(redisClient, "waphafiz")
+	shareUC := usecase.NewShareUseCase(shareRepo, userRepo, hafalanRepo, murajaahRepo, quranClient, shareCache)
 
 	val := validator.New()
 	startTime := time.Now()
@@ -119,6 +124,7 @@ func main() {
 		Hafalan:   handler.NewHafalanHandler(hafalanUC, val),
 		Murajaah:  handler.NewMurajaahHandler(murajaahUC),
 		Dashboard: handler.NewDashboardHandler(dashboardUC),
+		Share:     handler.NewShareHandler(shareUC, val),
 	}
 
 	handlers.Health.AddChecker("redis", func(ctx context.Context) string {

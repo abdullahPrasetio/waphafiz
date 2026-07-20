@@ -17,6 +17,7 @@ type Handlers struct {
 	Hafalan   *handler.HafalanHandler
 	Murajaah  *handler.MurajaahHandler
 	Dashboard *handler.DashboardHandler
+	Share     *handler.ShareHandler
 }
 
 func Setup(app *fiber.App, h *Handlers, jwtCfg *auth.Config, appEnv string, userCtx fiber.Handler) {
@@ -33,6 +34,7 @@ func Setup(app *fiber.App, h *Handlers, jwtCfg *auth.Config, appEnv string, user
 	RegisterFamilyRoutes(v1, h.Family, jwtCfg, userCtx)
 	RegisterMurajaahRoutes(v1, h.Murajaah, jwtCfg, userCtx)
 	RegisterDashboardRoutes(v1, h.Dashboard, jwtCfg, userCtx)
+	RegisterShareRoutes(v1, h.Share, jwtCfg, userCtx)
 }
 
 func prodGuard(appEnv string) fiber.Handler {

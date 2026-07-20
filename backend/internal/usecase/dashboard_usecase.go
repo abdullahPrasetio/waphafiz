@@ -59,21 +59,11 @@ func (u *dashboardUseCase) GetMyDashboard(ctx context.Context, userID uuid.UUID)
 		return nil, fmt.Errorf("fetch hafalan: %w", err)
 	}
 
-	dash := &MyDashboard{}
-	surahMap := make(map[int]bool)
-	totalAyat := 0
-
-	for _, h := range hafalan {
-		ayat := h.AyatEnd - h.AyatStart + 1
-		totalAyat += ayat
-		if h.Status == entity.StatusHafal {
-			dash.TotalHafalAyat += ayat
-			surahMap[h.SurahNumber] = true
-		}
-	}
-	dash.TotalHafalSurah = len(surahMap)
-	if totalAyat > 0 {
-		dash.PercentHafal = float64(dash.TotalHafalAyat) / float64(totalAyat) * 100
+	stats := calcHafalanStats(hafalan)
+	dash := &MyDashboard{
+		TotalHafalAyat:  stats.TotalHafalAyat,
+		TotalHafalSurah: stats.TotalHafalSurah,
+		PercentHafal:    stats.PercentHafal,
 	}
 
 	today := todayDate()
@@ -96,39 +86,10 @@ func (u *dashboardUseCase) GetMyDashboard(ctx context.Context, userID uuid.UUID)
 func (u *dashboardUseCase) calculateStreak(ctx context.Context, userID uuid.UUID) int {
 	// Get recent history (last 30 days max)
 	schedules, _, err := u.murajaahRepo.FindHistoryByUserID(ctx, userID, 200, 0)
-	if err != nil || len(schedules) == 0 {
+	if err != nil {
 		return 0
 	}
-
-	// Build set of days where all murajaah were completed
-	dayCompleted := make(map[string]bool)
-	dayTotal := make(map[string]int)
-	dayDone := make(map[string]int)
-
-	for _, s := range schedules {
-		day := s.ScheduledDate.Format("2006-01-02")
-		dayTotal[day]++
-		if s.CompletedAt != nil {
-			dayDone[day]++
-		}
-	}
-	for day, total := range dayTotal {
-		if dayDone[day] == total {
-			dayCompleted[day] = true
-		}
-	}
-
-	streak := 0
-	current := time.Now()
-	for {
-		day := current.Format("2006-01-02")
-		if !dayCompleted[day] {
-			break
-		}
-		streak++
-		current = current.AddDate(0, 0, -1)
-	}
-	return streak
+	return calcStreak(schedules, time.Now())
 }
 
 func (u *dashboardUseCase) GetAdminDashboard(ctx context.Context, familyGroupID uuid.UUID) (*AdminDashboard, error) {
