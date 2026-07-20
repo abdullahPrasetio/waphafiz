@@ -58,6 +58,7 @@ func openIntegrationDB(t *testing.T) *gorm.DB {
 		&entity.HafalanProgress{},
 		&entity.MurajaahSchedule{},
 		&entity.MurajaahLog{},
+		&entity.DashboardShare{},
 	))
 	return db
 }
@@ -67,6 +68,7 @@ func openIntegrationDB(t *testing.T) *gorm.DB {
 func cleanupRows(t *testing.T, db *gorm.DB, userIDs []uuid.UUID, familyIDs []uuid.UUID) {
 	t.Helper()
 	t.Cleanup(func() {
+		db.Unscoped().Where("user_id IN ?", userIDs).Delete(&entity.DashboardShare{})
 		db.Unscoped().Where("user_id IN ?", userIDs).Delete(&entity.MurajaahLog{})
 		db.Unscoped().Where("user_id IN ?", userIDs).Delete(&entity.MurajaahSchedule{})
 		db.Unscoped().Where("user_id IN ?", userIDs).Delete(&entity.HafalanProgress{})
