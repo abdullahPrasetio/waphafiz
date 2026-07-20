@@ -22,6 +22,24 @@ func SecurityHeaders() fiber.Handler {
 	})
 }
 
+// PublicShareRateLimiter membatasi endpoint share publik (tanpa auth) lebih
+// ketat dari limiter global, untuk mencegah abuse/scraping token.
+func PublicShareRateLimiter() fiber.Handler {
+	return limiter.New(limiter.Config{
+		Max:        30,
+		Expiration: 1 * time.Minute,
+		KeyGenerator: func(c *fiber.Ctx) string {
+			return c.IP()
+		},
+		LimitReached: func(c *fiber.Ctx) error {
+			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
+				"status":  false,
+				"message": "too many requests, please slow down",
+			})
+		},
+	})
+}
+
 func RateLimiter() fiber.Handler {
 	return limiter.New(limiter.Config{
 		Max:        100,
