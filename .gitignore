@@ -14,3 +14,4 @@ backend/logs/
 
 # OS
 .DS_Store
+docker-compose.casaos.yml

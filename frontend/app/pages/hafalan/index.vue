@@ -164,7 +164,13 @@ async function onUpdateStatus(h: HafalanProgress, newStatus: string) {
 }
 
 async function deleteHafalan(h: HafalanProgress) {
-  if (!confirm(`Hapus hafalan Surah ${h.surah_number} ayat ${h.ayat_start}–${h.ayat_end}?`)) return
+  const ok = await useConfirm().confirm({
+    title: `Hapus hafalan Surah ${h.surah_number}?`,
+    message: `Ayat ${h.ayat_start}–${h.ayat_end} akan dihapus permanen.`,
+    confirmText: 'Hapus',
+    variant: 'danger',
+  })
+  if (!ok) return
   if (playingId.value === h.id) stopAudio()
   deletingId.value = h.id
   try {

@@ -327,7 +327,13 @@ async function updateHafalan(h: HafalanItem, newStatus: string) {
 }
 
 async function deleteHafalan(h: HafalanItem) {
-  if (!confirm(`Hapus hafalan Surah ${h.surah_number} ayat ${h.ayat_start}–${h.ayat_end}?`)) return
+  const ok = await useConfirm().confirm({
+    title: `Hapus hafalan Surah ${h.surah_number}?`,
+    message: `Ayat ${h.ayat_start}–${h.ayat_end} akan dihapus permanen.`,
+    confirmText: 'Hapus',
+    variant: 'danger',
+  })
+  if (!ok) return
   deletingId.value = h.id
   try {
     await apiFetch(`/admin/hafalan/${h.id}`, { method: 'DELETE' })
