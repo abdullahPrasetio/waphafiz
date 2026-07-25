@@ -33,9 +33,10 @@ Gunakan sebagai referensi saat membangun komponen di Nuxt 3 + Tailwind.
 ## Typography
 
 - **Font utama:** `Inter` (400, 500, 600)
+- **Font display (heading besar):** `Fraunces` (500, 600) — class token `--font-display`, dipakai di `.auth-heading`, `.page-title-main`, `.surah-name-id`. Fallback ke Inter jika Fraunces gagal load.
 - **Font Arab:** `Amiri` (400, 700) — class `arabic`, direction `rtl`
 - **Body default:** 13–14px Inter
-- **Heading halaman:** 20–22px, weight 600
+- **Heading halaman:** 20–22px, weight 600, font `Fraunces`
 - **Label seksi:** 10–11px, uppercase, letter-spacing 0.07em, warna `--text-tertiary`
 
 ---
@@ -181,7 +182,7 @@ Varian warna: `av-green`, `av-purple`, `av-amber`, `av-blue`
 ### Dashboard
 
 - Streak chip: bg `--amber-light`, color `--amber-mid`, dengan icon `ti-flame`
-- Reminder bar: bg `--green-light`, border `#9FE1CB`, flex row dengan icon bell
+- Reminder bar: bg `--green-light`, border `--green-border-light` (`#9FE1CB`), flex row dengan icon bell
 - Stats grid: `grid-template-columns: repeat(4, 1fr)` → 2 kolom di ≤768px
 - Grid-2: 2 kartu sejajar (muraja'ah hari ini + progress hafalan)
 
@@ -196,7 +197,7 @@ Varian warna: `av-green`, `av-purple`, `av-amber`, `av-blue`
 
 - Toolbar: search + filter button (Semua/Hafal/Sedang/Belum) + tombol Tambah
 - Surah grid: `grid-template-columns: repeat(auto-fill, minmax(175px, 1fr))`
-- Card status border: hafal → `--green-mid`, sedang → `#FAC775`, belum → default
+- Card status border: hafal → `--green-mid`, sedang → `--amber-border` (`#FAC775`), belum → default
 - Modal tambah hafalan: backdrop rgba overlay, modal box `max-width: 380px`
 
 ### Muraja'ah

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WAPHafiz — Design Preview</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Amiri:wght@400;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,6 +37,8 @@
     --green-border-light: #9FE1CB;
     --amber-border: #FAC775;
     --amber-fill: #EF9F27;
+    /* Hallmark audit fix (minor): display face for headings, distinct from Inter body */
+    --font-display: 'Fraunces', 'Inter', serif;
   }
   /* Hallmark · design-system: design.md · audited 2026-07-25 · fixes: token-improvisation, transition-all */
 
@@ -139,7 +141,7 @@
   }
   .auth-logo-text { font-size: 20px; font-weight: 600; color: var(--text-primary); }
   .auth-logo-text span { color: var(--green); }
-  .auth-heading { font-size: 22px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+  .auth-heading { font-family: var(--font-display); font-size: 24px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
   .auth-sub { font-size: 13.5px; color: var(--text-secondary); margin-bottom: 2rem; }
   .auth-link-row { text-align: center; font-size: 13px; color: var(--text-secondary); margin-top: 1.25rem; }
   .auth-link-row a { color: var(--green); text-decoration: none; font-weight: 500; }
@@ -183,7 +185,7 @@
 
   .main-content { flex: 1; background: var(--gray-bg); padding: 2rem; overflow-y: auto; }
   .page-header { margin-bottom: 1.5rem; }
-  .page-title-main { font-size: 20px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+  .page-title-main { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
   .page-sub-main { font-size: 13px; color: var(--text-secondary); }
   .streak-chip {
     display: inline-flex; align-items: center; gap: 5px;
@@ -239,7 +241,7 @@
   .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); margin-bottom: 1.25rem; cursor: pointer; text-decoration: none; }
   .surah-header { background: white; border: 1px solid var(--gray-border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
   .surah-meta { display: flex; justify-content: space-between; align-items: flex-start; }
-  .surah-name-id { font-size: 20px; font-weight: 600; color: var(--text-primary); }
+  .surah-name-id { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--text-primary); }
   .surah-name-info { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
   .surah-name-ar { font-size: 32px; color: var(--green); direction: rtl; }
   .surah-prog-wrap { max-width: 320px; margin-top: 1rem; }
