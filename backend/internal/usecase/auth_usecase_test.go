@@ -276,3 +276,63 @@ func TestAuthLogin_InactiveUser(t *testing.T) {
 	_, err := uc.Login(context.Background(), &usecase.LoginRequest{Email: "inactive@test.com", Password: "password123"})
 	assert.ErrorIs(t, err, usecase.ErrUserInactive)
 }
+
+// ── ChangePassword ───────────────────────────────────────────────────────────
+
+func TestChangePassword_OK(t *testing.T) {
+	userRepo := newFakeUserRepo()
+	familyRepo := newFakeFamilyGroupRepo()
+	hash, _ := bcrypt.GenerateFromPassword([]byte("oldpassword123"), bcrypt.DefaultCost)
+	user := &entity.User{Email: "user@test.com", Password: string(hash), Role: entity.RoleMember, IsActive: true}
+	_ = userRepo.Create(context.Background(), user)
+	uc := usecase.NewAuthUseCase(userRepo, familyRepo, testJWTCfg)
+
+	err := uc.ChangePassword(context.Background(), user.ID, &usecase.ChangePasswordRequest{
+		CurrentPassword: "oldpassword123", NewPassword: "newpassword456",
+	})
+	require.NoError(t, err)
+
+	stored, err := userRepo.FindByID(context.Background(), user.ID)
+	require.NoError(t, err)
+	assert.NoError(t, bcrypt.CompareHashAndPassword([]byte(stored.Password), []byte("newpassword456")), "new password should be hashed and verifiable")
+	assert.Error(t, bcrypt.CompareHashAndPassword([]byte(stored.Password), []byte("oldpassword123")), "old password should no longer work")
+}
+
+func TestChangePassword_WrongCurrentPassword(t *testing.T) {
+	userRepo := newFakeUserRepo()
+	familyRepo := newFakeFamilyGroupRepo()
+	hash, _ := bcrypt.GenerateFromPassword([]byte("oldpassword123"), bcrypt.DefaultCost)
+	user := &entity.User{Email: "user@test.com", Password: string(hash), IsActive: true}
+	_ = userRepo.Create(context.Background(), user)
+	uc := usecase.NewAuthUseCase(userRepo, familyRepo, testJWTCfg)
+
+	err := uc.ChangePassword(context.Background(), user.ID, &usecase.ChangePasswordRequest{
+		CurrentPassword: "wrong-password", NewPassword: "newpassword456",
+	})
+	assert.ErrorIs(t, err, usecase.ErrInvalidCredentials)
+}
+
+func TestChangePassword_SameAsOldPassword(t *testing.T) {
+	userRepo := newFakeUserRepo()
+	familyRepo := newFakeFamilyGroupRepo()
+	hash, _ := bcrypt.GenerateFromPassword([]byte("samepassword123"), bcrypt.DefaultCost)
+	user := &entity.User{Email: "user@test.com", Password: string(hash), IsActive: true}
+	_ = userRepo.Create(context.Background(), user)
+	uc := usecase.NewAuthUseCase(userRepo, familyRepo, testJWTCfg)
+
+	err := uc.ChangePassword(context.Background(), user.ID, &usecase.ChangePasswordRequest{
+		CurrentPassword: "samepassword123", NewPassword: "samepassword123",
+	})
+	assert.ErrorIs(t, err, usecase.ErrSamePassword)
+}
+
+func TestChangePassword_UserNotFound(t *testing.T) {
+	userRepo := newFakeUserRepo()
+	familyRepo := newFakeFamilyGroupRepo()
+	uc := usecase.NewAuthUseCase(userRepo, familyRepo, testJWTCfg)
+
+	err := uc.ChangePassword(context.Background(), uuid.New(), &usecase.ChangePasswordRequest{
+		CurrentPassword: "whatever123", NewPassword: "newpassword456",
+	})
+	assert.ErrorIs(t, err, usecase.ErrNotFound)
+}

@@ -43,11 +43,16 @@
 
       <ClientOnly>
         <div class="p-4 border-t border-gray-200 flex items-center gap-2.5">
-          <AppAvatar :name="authStore.user?.name || ''" size="sm" />
-          <div class="flex-1 min-w-0">
-            <div class="text-[13px] font-medium text-gray-900 truncate">{{ authStore.user?.name }}</div>
-            <div class="text-[11px] text-gray-400 capitalize">{{ authStore.user?.role }}</div>
-          </div>
+          <NuxtLink to="/settings" class="flex items-center gap-2.5 flex-1 min-w-0 no-underline text-inherit">
+            <AppAvatar :name="authStore.user?.name || ''" size="sm" />
+            <div class="flex-1 min-w-0">
+              <div class="text-[13px] font-medium text-gray-900 truncate">{{ authStore.user?.name }}</div>
+              <div class="text-[11px] text-gray-400 capitalize">{{ authStore.user?.role }}</div>
+            </div>
+          </NuxtLink>
+          <NuxtLink to="/settings" class="text-gray-400 hover:text-green-500 flex-shrink-0" title="Pengaturan Akun">
+            <IconSettings :size="17" />
+          </NuxtLink>
           <button
             class="text-gray-400 hover:text-red-500 border-none bg-none flex-shrink-0"
             title="Keluar"
@@ -63,9 +68,14 @@
       <div class="text-[15px] font-semibold text-gray-900">
         WAP<span class="text-green-500">Hafiz</span>
       </div>
-      <button class="text-gray-400 hover:text-red-500 border-none bg-none" title="Keluar" @click="handleLogout">
-        <IconLogout :size="19" />
-      </button>
+      <div class="flex items-center gap-3">
+        <NuxtLink to="/settings" class="text-gray-400 hover:text-green-500" title="Pengaturan Akun">
+          <IconSettings :size="19" />
+        </NuxtLink>
+        <button class="text-gray-400 hover:text-red-500 border-none bg-none" title="Keluar" @click="handleLogout">
+          <IconLogout :size="19" />
+        </button>
+      </div>
     </header>
 
     <!-- Main -->
@@ -99,7 +109,7 @@
 <script setup lang="ts">
 import {
   IconLayoutDashboard, IconBook, IconChecklist,
-  IconRefresh, IconUsers, IconChartBar, IconLogout,
+  IconRefresh, IconUsers, IconChartBar, IconLogout, IconSettings,
 } from '@tabler/icons-vue'
 
 const authStore = useAuthStore()

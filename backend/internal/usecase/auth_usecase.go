@@ -22,6 +22,7 @@ var (
 	ErrInvalidInviteCode  = errors.New("invite code tidak valid")
 	ErrInvalidCredentials = errors.New("email atau password salah")
 	ErrUserInactive       = errors.New("akun tidak aktif")
+	ErrSamePassword       = errors.New("password baru tidak boleh sama dengan password lama")
 )
 
 type RegisterRequest struct {
@@ -43,6 +44,11 @@ type LoginRequest struct {
 	Password string `json:"password" validate:"required"`
 }
 
+type ChangePasswordRequest struct {
+	CurrentPassword string `json:"current_password" validate:"required,min=8,max=72"`
+	NewPassword     string `json:"new_password"     validate:"required,min=8,max=72"`
+}
+
 type AuthResponse struct {
 	Token  string    `json:"token"`
 	User   UserInfo  `json:"user"`
@@ -61,6 +67,7 @@ type AuthUseCase interface {
 	Register(ctx context.Context, req *RegisterRequest) (*AuthResponse, error)
 	RegisterFamily(ctx context.Context, req *RegisterFamilyRequest) (*AuthResponse, error)
 	Login(ctx context.Context, req *LoginRequest) (*AuthResponse, error)
+	ChangePassword(ctx context.Context, userID uuid.UUID, req *ChangePasswordRequest) error
 }
 
 type authUseCase struct {
@@ -210,6 +217,41 @@ func (u *authUseCase) buildAuthResponse(user *entity.User, fg *entity.FamilyGrou
 	}
 
 	return &AuthResponse{Token: token, User: info}, nil
+}
+
+func (u *authUseCase) ChangePassword(ctx context.Context, userID uuid.UUID, req *ChangePasswordRequest) error {
+	// Find user
+	user, err := u.userRepo.FindByID(ctx, userID)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return ErrNotFound
+		}
+		return fmt.Errorf("find user: %w", err)
+	}
+
+	// Verify current password matches
+	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(req.CurrentPassword)); err != nil {
+		return ErrInvalidCredentials
+	}
+
+	// Reject if new password is identical to the current one
+	if req.CurrentPassword == req.NewPassword {
+		return ErrSamePassword
+	}
+
+	// Hash new password
+	hash, err := bcrypt.GenerateFromPassword([]byte(req.NewPassword), bcrypt.DefaultCost)
+	if err != nil {
+		return fmt.Errorf("hashing password: %w", err)
+	}
+
+	// Update user password
+	user.Password = string(hash)
+	if err := u.userRepo.Update(ctx, user); err != nil {
+		return fmt.Errorf("update user: %w", err)
+	}
+
+	return nil
 }
 
 func generateInviteCode() (string, error) {
