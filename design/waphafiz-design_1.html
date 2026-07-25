@@ -33,7 +33,12 @@
     --radius-md: 10px;
     --radius-lg: 14px;
     --radius-xl: 20px;
+    /* Hallmark audit fix: previously-inline hex values lifted into named tokens */
+    --green-border-light: #9FE1CB;
+    --amber-border: #FAC775;
+    --amber-fill: #EF9F27;
   }
+  /* Hallmark · design-system: design.md · audited 2026-07-25 · fixes: token-improvisation, transition-all */
 
   body { font-family: 'Inter', sans-serif; background: #ECEEF2; color: var(--text-primary); }
   .arabic { font-family: 'Amiri', serif; }
@@ -49,7 +54,7 @@
     flex-shrink: 0; padding: 14px 20px; font-size: 13px; font-weight: 500;
     color: var(--text-secondary); background: none; border: none;
     border-bottom: 2px solid transparent; cursor: pointer;
-    white-space: nowrap; transition: all 0.15s;
+    white-space: nowrap; transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
   }
   .tab-btn.active { color: var(--green); border-bottom-color: var(--green); }
   .tab-btn:hover:not(.active) { color: var(--text-primary); background: var(--gray-bg); }
@@ -139,7 +144,7 @@
   .auth-link-row { text-align: center; font-size: 13px; color: var(--text-secondary); margin-top: 1.25rem; }
   .auth-link-row a { color: var(--green); text-decoration: none; font-weight: 500; }
   .invite-info {
-    background: var(--green-light); border: 1px solid #9FE1CB;
+    background: var(--green-light); border: 1px solid var(--green-border-light);
     border-radius: var(--radius-md); padding: 10px 14px;
     display: flex; align-items: flex-start; gap: 8px;
     margin-bottom: 1rem; font-size: 12.5px; color: var(--green-darker); line-height: 1.5;
@@ -166,7 +171,7 @@
   .nav-item {
     display: flex; align-items: center; gap: 10px; padding: 9px 1.25rem;
     font-size: 13.5px; color: var(--text-secondary); cursor: pointer;
-    border-left: 2px solid transparent; transition: all 0.12s;
+    border-left: 2px solid transparent; transition: color 0.12s ease, background-color 0.12s ease, border-color 0.12s ease;
   }
   .nav-item:hover { background: var(--gray-bg); color: var(--text-primary); }
   .nav-item.active { color: var(--green); background: var(--green-light); border-left-color: var(--green); font-weight: 500; }
@@ -188,7 +193,7 @@
   }
 
   .reminder-bar {
-    background: var(--green-light); border: 1px solid #9FE1CB;
+    background: var(--green-light); border: 1px solid var(--green-border-light);
     border-radius: var(--radius-md); padding: 11px 16px;
     display: flex; align-items: center; gap: 10px;
     margin-bottom: 1.5rem; font-size: 13px; color: var(--green-darker);
@@ -300,7 +305,7 @@
   }
   .surah-card:hover { border-color: var(--green-mid); }
   .surah-card.hafal { border-color: var(--green-mid); }
-  .surah-card.sedang { border-color: #FAC775; }
+  .surah-card.sedang { border-color: var(--amber-border); }
   .sc-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
   .sc-num { font-size: 11px; color: var(--text-tertiary); }
   .sc-name { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 2px; }
@@ -354,7 +359,7 @@
     border: 1.5px solid var(--gray-border); display: flex;
     align-items: center; justify-content: center; font-size: 15px;
     color: var(--text-tertiary); cursor: pointer; background: none;
-    transition: all 0.15s;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   }
   .mj-check-btn.done { background: var(--green); border-color: var(--green); color: white; }
 
@@ -455,7 +460,7 @@
   .note-point { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
   .note-point i { color: var(--green); font-size: 15px; margin-top: 1px; flex-shrink: 0; }
   .code-note {
-    background: var(--green-light); border: 1px solid #9FE1CB;
+    background: var(--green-light); border: 1px solid var(--green-border-light);
     border-radius: var(--radius-md); padding: 12px 14px;
     font-size: 12px; color: var(--green-darker);
     line-height: 1.6; margin-top: 1rem;
@@ -755,7 +760,7 @@
           <div class="sc-top"><span class="sc-num">68</span><span class="badge badge-amber">Sedang</span></div>
           <div class="sc-name">Al-Qalam</div>
           <div class="sc-ar arabic">القلم</div>
-          <div class="prog-bar-bg" style="height:3px;margin-bottom:5px"><div class="prog-bar" style="height:3px;width:45%;background:#EF9F27"></div></div>
+          <div class="prog-bar-bg" style="height:3px;margin-bottom:5px"><div class="prog-bar" style="height:3px;width:45%;background:var(--amber-fill)"></div></div>
           <div class="sc-info">24 / 52 ayat</div>
         </div>
         <div class="surah-card">
@@ -774,14 +779,14 @@
           <div class="sc-top"><span class="sc-num">36</span><span class="badge badge-amber">Sedang</span></div>
           <div class="sc-name">Yasin</div>
           <div class="sc-ar arabic">يس</div>
-          <div class="prog-bar-bg" style="height:3px;margin-bottom:5px"><div class="prog-bar" style="height:3px;width:74%;background:#EF9F27"></div></div>
+          <div class="prog-bar-bg" style="height:3px;margin-bottom:5px"><div class="prog-bar" style="height:3px;width:74%;background:var(--amber-fill)"></div></div>
           <div class="sc-info">61 / 83 ayat</div>
         </div>
         <div class="surah-card sedang">
           <div class="sc-top"><span class="sc-num">56</span><span class="badge badge-amber">Sedang</span></div>
           <div class="sc-name">Al-Waqiah</div>
           <div class="sc-ar arabic">الواقعة</div>
-          <div class="prog-bar-bg" style="height:3px;margin-bottom:5px"><div class="prog-bar" style="height:3px;width:55%;background:#EF9F27"></div></div>
+          <div class="prog-bar-bg" style="height:3px;margin-bottom:5px"><div class="prog-bar" style="height:3px;width:55%;background:var(--amber-fill)"></div></div>
           <div class="sc-info">51 / 96 ayat</div>
         </div>
       </div>
