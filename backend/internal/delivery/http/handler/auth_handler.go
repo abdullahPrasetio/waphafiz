@@ -4,8 +4,10 @@ import (
 	"errors"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
 
+	mw "github.com/abdullahPrasetio/waphafiz/internal/delivery/http/middleware"
 	"github.com/abdullahPrasetio/waphafiz/internal/usecase"
 	"github.com/abdullahPrasetio/waphafiz/pkg/response"
 	"github.com/abdullahPrasetio/waphafiz/pkg/validator"
@@ -68,6 +70,26 @@ func (h *AuthHandler) Login(c *fiber.Ctx) error {
 	return response.Success(c, "login berhasil", res)
 }
 
+func (h *AuthHandler) ChangePassword(c *fiber.Ctx) error {
+	userID := mw.GetUserID(c)
+	if userID == uuid.Nil {
+		return response.Unauthorized(c)
+	}
+
+	var req usecase.ChangePasswordRequest
+	if err := c.BodyParser(&req); err != nil {
+		return response.BadRequest(c, "request tidak valid")
+	}
+	if err := h.val.Validate(&req); err != nil {
+		return response.ValidationError(c, err.Error())
+	}
+
+	if err := h.uc.ChangePassword(c.UserContext(), userID, &req); err != nil {
+		return h.mapError(c, err)
+	}
+	return response.Success(c, "password berhasil diubah", nil)
+}
+
 func (h *AuthHandler) mapError(c *fiber.Ctx, err error) error {
 	switch {
 	case errors.Is(err, usecase.ErrInvalidInviteCode):
@@ -78,6 +100,10 @@ func (h *AuthHandler) mapError(c *fiber.Ctx, err error) error {
 		return response.Error(c, fiber.StatusForbidden, response.ErrForbidden, err.Error())
 	case errors.Is(err, usecase.ErrEmailConflict):
 		return response.Conflict(c, "email sudah terdaftar")
+	case errors.Is(err, usecase.ErrSamePassword):
+		return response.BadRequest(c, err.Error())
+	case errors.Is(err, usecase.ErrNotFound):
+		return response.NotFound(c, "user tidak ditemukan")
 	default:
 		log.Error().Err(err).Str("request_id", c.GetRespHeader("X-Request-Id")).Msg("auth handler: unhandled error")
 		return response.InternalError(c)

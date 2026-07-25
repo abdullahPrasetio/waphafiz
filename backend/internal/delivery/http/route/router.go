@@ -27,7 +27,7 @@ func Setup(app *fiber.App, h *Handlers, jwtCfg *auth.Config, appEnv string, user
 
 	v1 := app.Group("/api/v1")
 
-	RegisterAuthRoutes(v1, h.Auth)
+	RegisterAuthRoutes(v1, h.Auth, jwtCfg, userCtx)
 	RegisterUserRoutes(v1, h.User)
 	RegisterQuranRoutes(v1, h.Quran, jwtCfg, userCtx)
 	RegisterHafalanRoutes(v1, h.Hafalan, jwtCfg, userCtx)
